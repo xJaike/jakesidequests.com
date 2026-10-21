@@ -1,36 +1,98 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jake Side Quests</title>
-<meta name="description" content="Games and side projects by Jake Side Quests.">
-<link rel="canonical" href="https://jakesidequests.com/">
-<style>
-  :root { --bg: #ffffff; --surface: #f1f4fa; --text: #172238; --muted: #45546d; --accent: #b80059; --accent2: #006978; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #090a13; --surface: #151829; --text: #f4f6fc; --muted: #94a3b8; --accent: #ff4fa0; --accent2: #00f0ff; } }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 4px; }
-  h2 { font-size: 19px; margin: 28px 0 6px; }
-  .meta, .crumb { color: var(--muted); margin: 0 0 24px; }
-  .crumb { font-size: 14px; margin-bottom: 8px; }
-  a { color: var(--accent); }
-  .lanes { height: 6px; background: linear-gradient(90deg, #00f0ff 0 25%, #ff007f 25% 50%, #00ff88 50% 75%, #ffe600 75%); }
-  footer { max-width: 720px; margin: 0 auto; padding: 0 16px 40px; color: var(--muted); font-size: 14px; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jake Side Quests — Games, experiments & things I build</title>
+  <meta name="description" content="Games, experiments, and things Jake couldn’t help building. Explore SENRITSU, a rhythm game that turns your own music into something you can play.">
+  <meta name="theme-color" content="#f7f6f0">
+  <link rel="canonical" href="https://jakesidequests.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jake Side Quests">
+  <meta property="og:title" content="Jake Side Quests — Games, experiments & things I build">
+  <meta property="og:description" content="Games, experiments, and things Jake couldn’t help building. Explore SENRITSU, a rhythm game that turns your own music into something you can play.">
+  <meta property="og:url" content="https://jakesidequests.com/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script src="/assets/site.js"></script>
+  <link rel="preload" href="/assets/fonts/spacegrotesk.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<div class="lanes"></div>
-<main>
-  <h1>Jake Side Quests</h1>
-  <p class="meta">Games and side projects.</p>
-  <h2>Games</h2>
-  <p><a href="/senritsu/">SENRITSU – Rhythm Game</a>: turn your own songs into rhythm charts. Android.</p>
-  <h2>Follow</h2>
-  <p><a href="https://www.facebook.com/JakeSideQuests">Jake Side Quests on Facebook</a></p>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header container">
+  <a class="brand" href="/" aria-label="Jake Side Quests home"><svg class="brand-mark" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M32 3 39 23 59 16 45 32 59 48 39 41 32 61 25 41 5 48 19 32 5 16 25 23Z"/></svg><span class="brand-name">jake<span>side quests.</span></span></a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a class="nav-external" href="https://www.facebook.com/JakeSideQuests">Say hello <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="theme-toggle" type="button" aria-label="Switch theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+  </nav>
+</header>
+<main id="main" class="container">
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <p class="eyebrow"><span class="dot"></span> The personal playground of Jake</p>
+      <h1 id="hero-title">A little curiosity.<br>A lot of<br><em>side quests.</em></h1>
+      <p class="hero-description">Games, experiments, and things I couldn’t help building. Welcome to my little corner of the internet.</p>
+      <a class="button button-solid" href="#work">Explore my work <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit"></div>
+      <div class="idea-card"></div>
+      <svg class="quest-star" viewBox="0 0 200 200" fill="currentColor"><path d="M100 0 117 66 173 27 134 83 200 100 134 117 173 173 117 134 100 200 83 134 27 173 66 117 0 100 66 83 27 27 83 66Z"/><circle cx="100" cy="100" r="18" fill="#e9ef9b"/></svg>
+      <span class="art-note">↗ follow the curiosity</span>
+      <svg class="art-spark one" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M1 12h22M4 4l16 16M4 20 20 4" stroke="currentColor" stroke-width="1.5"/></svg><span class="art-spark two">+</span>
+      <span class="art-caption">always a work in progress.</span>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">01 / Out in the world</p><h2 id="work-title">Selected work<span style="color:var(--accent)">.</span></h2></div>
+      <span class="section-count">ONE QUEST AT A TIME ↙</span>
+    </div>
+    <article class="project-card">
+      <div class="project-copy">
+        <span class="project-label">Featured project / 001</span>
+        <div class="project-identity">
+          <img class="app-icon" src="/senritsu/icon.png" width="58" height="58" alt="" loading="lazy">
+          <div><h3>SENRITSU</h3><p>旋律 · Rhythm game</p></div>
+        </div>
+        <p>Your favorite songs. A whole new way to play. Turn your own music into rhythm charts and find your flow, one beat at a time.</p>
+        <div class="tags"><span class="tag">Android</span><span class="tag">Rhythm</span><span class="tag">Works offline</span></div>
+        <a class="text-link" href="/senritsu/">Meet SENRITSU <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="rhythm-art" aria-hidden="true">
+      <div class="rhythm-mini">旋律 / FIND YOUR FLOW</div>
+      <div class="rhythm-grid"><div class="rhythm-lane"><span class="rhythm-note" style="top:10%"></span><span class="rhythm-note" style="top:47%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:1%"></span><span class="rhythm-note" style="top:33%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:17%"></span><span class="rhythm-note" style="top:56%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:5%"></span><span class="rhythm-note" style="top:40%"></span><span class="rhythm-note outline" style="top:78%"></span></div></div>
+      <div class="rhythm-line"></div>
+      <div class="rhythm-wordmark">SENRITSU <span>YOUR MUSIC. YOUR RHYTHM.</span></div>
+    </div>
+    </article>
+    <p class="project-footnote"><span>Built with care. Played with joy.</span><span>MORE SIDE QUESTS TO COME ↗</span></p>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div><p class="eyebrow">02 / Behind the quests</p><h2 id="about-title">Hey, I’m Jake.<br>I like making things.</h2></div>
+    <div class="about-copy">
+      <p>This is where my side quests find a home: games, small experiments, and ideas that turned into something you can actually use.</p>
+      <p>I follow what interests me and build as I go. Sometimes that means a rhythm game. Sometimes it means seeing where the next idea leads.</p>
+      <div class="about-signoff"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 1v22M1 12h22M4 4l16 16M4 20 20 4" stroke="currentColor" stroke-width="1.5"/></svg> Made out of curiosity. Shared with you.</div>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contact-title">
+    <div><p class="eyebrow">Good things start with a hello</p><h2 id="contact-title">Got a thought? Say hi.</h2><p>Feedback, ideas, or just a friendly hello. I’m all ears.</p></div>
+    <a class="button" href="https://www.facebook.com/JakeSideQuests">Let’s connect <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </section>
 </main>
-<footer>© 2026 Jake Side Quests · <a href="/senritsu/privacy/">SENRITSU privacy policy</a></footer>
+<footer class="site-footer container">
+  <p>© 2026 Jake Side Quests</p>
+  <p>A little curiosity goes a long way.</p>
+  <div class="footer-links"><a href="/senritsu/privacy/">Privacy policy</a><a href="https://www.facebook.com/JakeSideQuests">Facebook ↗</a></div>
+</footer>
 </body>
 </html>
