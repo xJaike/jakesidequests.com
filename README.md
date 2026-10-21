@@ -23,4 +23,10 @@ Open [localhost:8000](http://localhost:8000). Use a local server so the absolute
 
 To feature another project, add an article alongside the existing `.project-card` in the homepage’s `#work` section. Keep project details and links accurate and provide descriptive text for meaningful images.
 
+## Keep pages consistent
+
+Use the homepage as the design reference for every project and supporting page. Reuse `.hero` for introductions, `.hero-art` for the illustrated card, `.section-heading` for section titles, `.project-card` for showcases, `.contact` for contact panels, and the shared button/link classes. Colors, type sizes, spacing, and corner radii are defined in `assets/site.css`; avoid page-specific replacements for these patterns.
+
+Keep the site header and footer identical across routes. Project pages can add `.page-context` with breadcrumbs and `.project-nav` for their own sections. Product policies belong to the corresponding project: SENRITSU’s privacy policy is linked from its game pages, never the homepage or shared site footer. New projects should link to their own applicable policies.
+
 The `CNAME` file retains the custom domain. Publish changes through the repository’s existing GitHub Pages workflow.
