@@ -21,6 +21,9 @@ Open [localhost:8000](http://localhost:8000). Use a local server so the absolute
 - `assets/site.js`: theme selection and persistence. The site content and navigation also work without JavaScript.
 - `assets/fonts/`: self-hosted DM Sans and Space Grotesk, with their licenses.
 - `assets/images/sinhs-logo.png`: SINHS school seal used in the SINHS SIS project card, copied from that project's static assets.
+- `assets/images/jake-side-quests-banner.webp`: homepage banner and social preview, optimized from `Jake Side Quests.png`.
+- `assets/images/jake-side-quests-emblem.webp`: shared header logo and homepage emblem, optimized from `Jake Side Quests Gaming Emblem.png`.
+- `assets/favicon.png`: 64px gaming emblem for browser tabs. The original brand PNGs remain in the repository root.
 
 Selected work currently features SENRITSU and SINHS SIS. The SINHS SIS card links to [the school information system](https://sinhs.jakesidequests.com/) and summarizes its enrollment, grading, attendance, and school-report workflows.
 
