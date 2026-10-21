@@ -20,6 +20,9 @@ Open [localhost:8000](http://localhost:8000). Use a local server so the absolute
 - `assets/site.css`: shared styles, responsive layouts, and both themes.
 - `assets/site.js`: theme selection and persistence. The site content and navigation also work without JavaScript.
 - `assets/fonts/`: self-hosted DM Sans and Space Grotesk, with their licenses.
+- `assets/images/sinhs-logo.png`: SINHS school seal used in the SINHS SIS project card, copied from that project's static assets.
+
+Selected work currently features SENRITSU and SINHS SIS. The SINHS SIS card links to [the school information system](https://sinhs.jakesidequests.com/) and summarizes its enrollment, grading, attendance, and school-report workflows.
 
 To feature another project, add an article alongside the existing `.project-card` in the homepage’s `#work` section. Keep project details and links accurate and provide descriptive text for meaningful images.
 
