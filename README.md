@@ -36,3 +36,23 @@ Use the homepage as the design reference for every project and supporting page. 
 Keep the site header and footer identical across routes. Project pages can add `.page-context` with breadcrumbs and `.project-nav` for their own sections. Product policies belong to the corresponding project: SENRITSU’s privacy policy is linked from its game pages, never the homepage or shared site footer. New projects should link to their own applicable policies.
 
 The `CNAME` file retains the custom domain. Publish changes through the repository’s existing GitHub Pages workflow.
+
+## Sync SENRITSU with the Android app
+
+`~/SENRITSU` is the app source for this site's SENRITSU product facts, icon, and privacy wording.
+With both repositories checked out beside each other, run from the website repository:
+
+```sh
+python3 ../SENRITSU/scripts/sync_website.py --website .
+python3 ../SENRITSU/scripts/sync_website.py --website . --check
+```
+
+The check reports drift without changing files. The sync updates marked SENRITSU homepage and
+product content, product meta descriptions, the privacy policy and its table of contents, and the
+icon. It also updates the app's store song catalog and appearance copy. Keep the `<!-- senritsu:… -->` markers intact.
+Edit feature wording in `../SENRITSU/design/website/features.html` and privacy wording in
+`../SENRITSU/design/play-store/privacy-policy.html`, then sync again. App counts and settings come
+from the Kotlin source, so the website cannot keep advertising an obsolete theme count.
+
+This is a local content workflow; it does not publish or change other portfolio projects. See
+`../SENRITSU/design/website/README.md` for the managed sources and release checks.
