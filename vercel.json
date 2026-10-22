@@ -36,14 +36,14 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "jakesidequests.vercel.app"
         }
       ],
-      "destination": "https://jakesidequests.com/:path*",
+      "destination": "https://jakesidequests.com/$1",
       "permanent": true
     }
   ]
