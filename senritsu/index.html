@@ -5,98 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SENRITSU — Your music. Your rhythm. | Jake Side Quests</title>
   <meta name="description" content="SENRITSU turns your music into a rhythm game for Android. 14 included songs, 18 themes, 29 note styles, and 6 hit effects. No ads; gameplay works offline.">
-  <meta name="theme-color" content="#0d0f2e">
+  <meta name="theme-color" content="#07061a">
   <link rel="canonical" href="https://jakesidequests.com/senritsu/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jake Side Quests">
   <meta property="og:title" content="SENRITSU — Your music. Your rhythm. | Jake Side Quests">
   <meta property="og:description" content="SENRITSU turns your music into a rhythm game for Android. 14 included songs, 18 themes, 29 note styles, and 6 hit effects. No ads; gameplay works offline.">
   <meta property="og:url" content="https://jakesidequests.com/senritsu/">
-  <meta property="og:image" content="https://jakesidequests.com/senritsu/icon.png">
+  <meta property="og:image" content="https://jakesidequests.com/assets/media/worlds/sakura_afterglow.webp">
   <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
   <link rel="preload" href="/assets/fonts/delagothicone-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/dotgothic16-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
-  <script src="/assets/site.js"></script>
+  <script>document.documentElement.classList.add('js');window.revealFallback=setTimeout(function(){document.documentElement.classList.add('no-anim')},4000);</script>
+  <script src="/assets/vendor/gsap.min.js" defer></script>
+  <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/vendor/SplitText.min.js" defer></script>
+  <script src="/assets/vendor/lenis.min.js" defer></script>
+  <script src="/assets/site.js" defer></script>
   <script src="/assets/rhythm.js" defer></script>
 </head>
-<body id="top">
+<body id="top" data-page="senritsu">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="hud">
-  <div class="hud-inner container">
-    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="40" height="40" alt=""><span class="brand-name">Jake Side Quests</span></a>
-    <p class="hud-area" aria-hidden="true">Area <span>SENRITSU</span></p>
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="44" height="44" alt=""><span class="brand-name">Jake Side Quests</span></a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/#work" aria-current="location">Quests</a>
+      <a href="/#work" aria-current="location">Work</a>
       <a href="/#about">About</a>
-      <a href="/#say-hello">Say hello</a>
+      <a href="/#say-hello">Say hi</a>
     </nav>
+    <button class="sound-toggle" type="button" aria-pressed="false" data-sound hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="label">Music off</span></button>
   </div>
 </header>
 
 <main id="main">
-  <div class="page-context container">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Quests</a></li><li><span aria-current="page">SENRITSU</span></li></ol></nav>
-    <nav class="project-nav" aria-label="SENRITSU navigation"><a href="/senritsu/" aria-current="page">Overview</a><a href="/senritsu/privacy/">Privacy policy</a></nav>
-  </div>
-
-  <section class="stage container" aria-labelledby="app-title">
-    <div class="stage-inner">
-      <div class="stage-copy">
-        <div class="app-title">
-          <img src="/senritsu/icon.png" width="512" height="512" alt="SENRITSU app icon">
-          <div><h1 id="app-title">SENRITSU</h1><p class="app-kana"><span lang="ja">旋律</span> means “melody”</p></div>
-        </div>
-        <p class="lede">Your favorite songs. A whole new way to play. Turn your own music into rhythm charts and find your flow, one beat at a time.</p>
-        <ul class="tags" aria-label="At a glance"><li class="tag">Android</li><li class="tag">Rhythm</li><li class="tag">Works offline</li></ul>
-        <div class="button-row">
-          <a class="button" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Get it on Google Play</a>
-          <a class="text-link cursor" href="#features">Explore the game</a>
-        </div>
+  <section class="game-hero" aria-labelledby="app-title">
+    <div class="game-hero-bg" aria-hidden="true" data-parallax="8"><img src="/assets/media/worlds/sakura_afterglow.webp" width="720" height="1080" alt=""></div>
+    <div class="container">
+      <div class="page-context">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Work</a></li><li><span aria-current="page">SENRITSU</span></li></ol></nav>
+        <nav class="project-nav" aria-label="SENRITSU navigation"><a href="/senritsu/" aria-current="page">Overview</a><a href="/senritsu/privacy/">Privacy policy</a></nav>
+      </div>
+      <div class="game-hero-grid">
+        <div class="game-copy">
+          <div class="mascot" data-reveal>
+            <img src="/senritsu/icon.png" width="512" height="512" alt="SENRITSU app icon: an anime character with neon headphones.">
+            <p class="kana-note"><span lang="ja">旋律</span> means “melody”</p>
+          </div>
+          <h1 id="app-title" class="glitch" data-text="SENRITSU" data-reveal>SENRITSU</h1>
+          <p class="lede" data-reveal>Your favorite songs. A whole new way to play. Turn your own music into rhythm charts and find your flow, one beat at a time.</p>
+          <ul class="chips" aria-label="At a glance" data-reveal><li class="chip">Android</li><li class="chip">Rhythm</li><li class="chip">Works offline</li></ul>
+          <div class="hero-actions" data-reveal>
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu" data-magnetic>Get it on Google Play</a>
+            <a class="btn btn-ghost" href="#features" data-magnetic>Explore the game</a>
+          </div>
         <!-- senritsu:summary:start -->
       <p class="page-meta">2 song imports free. No ads. Gameplay works offline.</p>
 <!-- senritsu:summary:end -->
-      </div>
-
-      <div class="window demo" data-demo>
-        <span class="window-tab">Try a few beats</span>
-        <div class="demo-field" data-demo-field>
-          <button class="demo-lane" type="button" data-lane="0" aria-label="Lane 1, key D"><kbd>D</kbd></button>
-          <button class="demo-lane" type="button" data-lane="1" aria-label="Lane 2, key F"><kbd>F</kbd></button>
-          <button class="demo-lane" type="button" data-lane="2" aria-label="Lane 3, key J"><kbd>J</kbd></button>
-          <button class="demo-lane" type="button" data-lane="3" aria-label="Lane 4, key K"><kbd>K</kbd></button>
-          <div class="demo-line" aria-hidden="true"></div>
-          <p class="demo-judge" data-judge aria-hidden="true"></p>
-          <p class="demo-combo" data-combo aria-hidden="true"></p>
-          <div class="demo-overlay" data-overlay>
-            <p class="demo-result" data-result aria-live="polite">Ready?</p>
-            <p data-result-detail>Tap a lane when a note crosses the line, or press D, F, J, and K. Each hit plays a note of the melody.</p>
-            <button class="button" type="button" data-start>Play the demo</button>
-          </div>
         </div>
-        <div class="demo-bar">
-          <span data-score>Score 0</span>
-          <button type="button" data-sound aria-pressed="true">Sound on</button>
+
+        <div class="demo" id="demo" data-demo data-reveal>
+          <div class="demo-screen">
+            <div class="demo-field" data-demo-field>
+              <img src="/assets/media/worlds/hanabi_night.webp" width="720" height="1080" alt="">
+              <div class="demo-hud" aria-hidden="true"><span data-score>Score 0</span><span class="acc" data-acc>Acc 100.0%</span></div>
+              <p class="demo-song" aria-hidden="true">Champion’s Rise, 150 BPM</p>
+              <div class="demo-lanes">
+                <button class="demo-lane lane-0" type="button" data-lane="0" aria-label="Lane 1: key D or Left arrow"><span class="receptor" aria-hidden="true"></span><kbd>D</kbd></button>
+                <button class="demo-lane lane-1" type="button" data-lane="1" aria-label="Lane 2: key F or Down arrow"><span class="receptor" aria-hidden="true"></span><kbd>F</kbd></button>
+                <button class="demo-lane lane-2" type="button" data-lane="2" aria-label="Lane 3: key J or Up arrow"><span class="receptor" aria-hidden="true"></span><kbd>J</kbd></button>
+                <button class="demo-lane lane-3" type="button" data-lane="3" aria-label="Lane 4: key K or Right arrow"><span class="receptor" aria-hidden="true"></span><kbd>K</kbd></button>
+              </div>
+              <div class="demo-judge" data-judge aria-hidden="true"></div>
+              <div class="demo-overlay" data-overlay>
+                <p class="demo-result" data-result aria-live="polite">Try a few beats</p>
+                <p data-result-detail>Tap a lane as each arrow reaches its target, or use D, F, J, K or the arrow keys.</p>
+                <button class="btn btn-primary" type="button" data-start>Play the demo</button>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption">A 30-second web demo with Champion’s Rise, one of the included songs. The game charts your own music too.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee" data-marquee="-1"><div class="marquee-track"><span>Your music ✦</span><span class="outline">Your rhythm ✦</span><span>Find your flow ✦</span><span class="outline">Perfect ✦</span><span>Your music ✦</span><span class="outline">Your rhythm ✦</span><span>Find your flow ✦</span><span class="outline">Perfect ✦</span></div></div>
+  </div>
+
+  <section class="section container" aria-labelledby="screens-title">
+    <h2 id="screens-title" class="section-title" data-reveal>Make it yours</h2>
+    <p class="section-lede" data-reveal style="margin-top:22px">Mix backgrounds, note styles, and hit effects. These are screens from the game.</p>
+    <div class="screens">
+      <figure data-reveal><div class="phone"><img src="/assets/media/screens/arrows.webp" width="360" height="638" alt="Note style picker showing thunder and crystal arrows." loading="lazy"></div><figcaption>New arrows</figcaption></figure>
+      <figure data-reveal><div class="phone"><img src="/assets/media/screens/icons.webp" width="360" height="638" alt="Note style picker showing parol stars, paper lanterns, folding fans, and lucky knots." loading="lazy"></div><figcaption>Cultural icons</figcaption></figure>
+      <figure data-reveal><div class="phone"><img src="/assets/media/screens/effects.webp" width="360" height="638" alt="Hit effect picker showing starburst and petal bloom." loading="lazy"></div><figcaption>Hit effects</figcaption></figure>
+      <figure data-reveal><div class="phone"><img src="/assets/media/screens/gameplay.webp" width="360" height="638" alt="Gameplay with lightning arrows and a PERFECT rating." loading="lazy"></div><figcaption>Perfect timing</figcaption></figure>
+    </div>
+  </section>
+
   <section class="section container" id="features" aria-labelledby="features-title">
-    <header class="section-head">
-      <h2 id="features-title">Get into the flow</h2>
-      <p class="section-note">Made for your music</p>
-    </header>
-    <article class="window quest experience" aria-labelledby="experience-title">
-      <span class="window-tab">The experience</span>
-      <div>
-        <h3 id="experience-title">Your music. Your rhythm.</h3>
+    <h2 id="features-title" class="section-title" data-reveal>Get into the flow</h2>
+    <article class="holo experience" data-tilt data-reveal style="margin-top:56px">
+      <h3>Your music. Your rhythm.</h3>
         <!-- senritsu:experience:start -->
         <p>Tap and hold the notes as they reach the targets. Start with 14 included songs, or bring your own music and make every beat your own.</p>
 <!-- senritsu:experience:end -->
-        <a class="text-link cursor" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Play SENRITSU</a>
-      </div>
-      <p class="experience-kana" aria-hidden="true">旋律</p>
+      <a class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu" data-magnetic>Play SENRITSU</a>
     </article>
     <!-- senritsu:features:start -->
     <div class="feature-grid">
@@ -110,51 +128,62 @@
 <!-- senritsu:features:end -->
   </section>
 
+  <section class="section worlds" aria-labelledby="worlds-title" data-worlds>
+    <div class="container worlds-head">
+      <h2 id="worlds-title" class="section-title" data-reveal>Play in<br>other worlds</h2>
+      <p class="section-lede" data-reveal>Anime-inspired themes paint Filipino, Japanese, Chinese, and Korean scenes behind every song.</p>
+    </div>
+    <div class="worlds-pin">
+      <div class="worlds-track" data-worlds-track>
+        <figure class="world"><img src="/assets/media/worlds/parol_fiesta.webp" width="720" height="1080" alt="A Filipino street at dusk hung with star-shaped parol lanterns." loading="lazy"><figcaption><strong>Parol Fiesta</strong><span>Filipino</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/palayan_dawn.webp" width="720" height="1080" alt="Rice terraces in the Cordillera mountains glowing at sunrise." loading="lazy"><figcaption><strong>Palayan Dawn</strong><span>Filipino</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/sakura_afterglow.webp" width="720" height="1080" alt="A canal at sunset lined with cherry blossoms and lantern-lit wooden houses." loading="lazy"><figcaption><strong>Sakura Afterglow</strong><span>Japanese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/hanabi_night.webp" width="720" height="1080" alt="Fireworks bloom over a lantern-lit riverside festival." loading="lazy"><figcaption><strong>Hanabi Night</strong><span>Japanese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/jade_waterway.webp" width="720" height="1080" alt="A jade-green canal in a water town with a stone bridge." loading="lazy"><figcaption><strong>Jade Waterway</strong><span>Chinese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/crimson_lanterns.webp" width="720" height="1080" alt="A courtyard of red lanterns framing a round moon gate." loading="lazy"><figcaption><strong>Crimson Lanterns</strong><span>Chinese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/hanok_moonrise.webp" width="720" height="1080" alt="A hanok neighborhood under a full moon." loading="lazy"><figcaption><strong>Hanok Moonrise</strong><span>Korean</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/seoul_dream.webp" width="720" height="1080" alt="A rainy hillside street overlooking a glowing city at night." loading="lazy"><figcaption><strong>Seoul Dream</strong><span>Korean</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section class="section container" aria-labelledby="details-title">
-    <header class="section-head">
-      <h2 id="details-title">A little more to know</h2>
-    </header>
+    <h2 id="details-title" class="section-title" data-reveal>A little more to know</h2>
     <div class="detail-grid">
-      <article class="window">
-        <span class="window-tab">Shop</span>
+      <article class="holo" data-tilt data-reveal>
         <h3>More music. One purchase.</h3>
         <!-- senritsu:pro:start -->
 <p>Your first 2 song imports are free. SENRITSU Pro unlocks unlimited imports with one purchase, no subscription. Themes, note styles, and hit effects are free for everyone.</p>
 <!-- senritsu:pro:end -->
-        <a class="text-link cursor" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Find SENRITSU on Google Play</a>
+        <a class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu" data-magnetic>Find SENRITSU on Google Play</a>
       </article>
-      <article class="window">
-        <span class="window-tab">Privacy</span>
+      <article class="holo" data-tilt data-reveal>
         <h3>Your music stays yours.</h3>
         <p>Learn how SENRITSU handles your songs, scores, purchases, and optional Google Play Games features.</p>
-        <a class="text-link cursor" href="/senritsu/privacy/">Read the SENRITSU privacy policy</a>
+        <a class="btn btn-ghost" href="/senritsu/privacy/" data-magnetic>Read the privacy policy</a>
       </article>
     </div>
   </section>
 
-  <section class="section container" id="say-hello" aria-labelledby="contact-title">
-    <div class="window inn-window">
-      <span class="window-tab">Inn</span>
-      <div>
-        <h2 id="contact-title">A little help with SENRITSU?</h2>
-        <p>Questions, feedback, or a song you can’t stop playing. I’m all ears.</p>
-      </div>
-      <ul class="command">
-        <li><a class="cursor is-active" href="https://www.facebook.com/JakeSideQuests">Message me on Facebook</a></li>
-        <li><a class="cursor" href="/#work">Back to all quests</a></li>
-      </ul>
+  <section class="section say-hi" id="say-hello" aria-labelledby="contact-title" data-fireworks>
+    <canvas class="fireworks" aria-hidden="true"></canvas>
+    <div class="say-hi-inner container">
+      <h2 id="contact-title" data-reveal>Say hi.</h2>
+      <p data-reveal>A little help with SENRITSU? Questions, feedback, or a song you can’t stop playing. I’m all ears.</p>
+      <a class="btn btn-primary" href="https://www.facebook.com/JakeSideQuests" data-magnetic data-reveal>Message me on Facebook</a>
+      <p class="hint" aria-hidden="true" data-reveal>Click the sky for fireworks.</p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner container">
-    <p class="thanks">Thanks for playing.</p>
-    <div class="footer-row">
-      <p>© 2026 Jake Side Quests</p>
-      <p>A little curiosity goes a long way.</p>
-      <div class="footer-links"><a href="/#work">Quests</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
-    </div>
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="marquee-track" data-marquee="-1"><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span></div>
+  </div>
+  <div class="container footer-row">
+    <p>© 2026 Jake Side Quests</p>
+    <p>A little curiosity goes a long way.</p>
+    <div class="footer-links"><a href="/#work">Work</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
   </div>
 </footer>
 </body>

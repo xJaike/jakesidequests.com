@@ -1,221 +1,233 @@
-// A small SENRITSU-style demo: four lanes, one short melody, and each hit plays its note.
+// The SENRITSU web demo: thirty seconds of Champion's Rise, with arrows charted to the song's own beats
+// (see scripts/build_media.py). Timing runs off the audio clock so notes stay locked to the music.
 (() => {
   const demo = document.querySelector('[data-demo]');
   if (!demo) return;
 
   const field = demo.querySelector('[data-demo-field]');
   const lanes = [...field.querySelectorAll('.demo-lane')];
-  const line = field.querySelector('.demo-line');
   const judge = field.querySelector('[data-judge]');
-  const comboLabel = field.querySelector('[data-combo]');
   const overlay = field.querySelector('[data-overlay]');
   const result = field.querySelector('[data-result]');
   const detail = field.querySelector('[data-result-detail]');
   const start = field.querySelector('[data-start]');
-  const scoreLabel = demo.querySelector('[data-score]');
-  const soundToggle = demo.querySelector('[data-sound]');
+  const scoreLabel = field.querySelector('[data-score]');
+  const accuracyLabel = field.querySelector('[data-acc]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  const KEYS = { d: 0, f: 1, j: 2, k: 3 };
-  const BEAT = 60000 / 124;
-  const STEP = BEAT / 2;
-  const LEAD_IN = BEAT * 4;
-  const TRAVEL = 1350;
-  const WINDOWS = [[45, 'Perfect', 300], [90, 'Great', 200], [150, 'Good', 100]];
-  const LANE_FOR_PITCH = { 72: 0, 74: 0, 76: 1, 79: 2, 81: 3, 84: 3 };
-  // [eighth-note step, MIDI pitch]: a little pentatonic tune, two phrases.
-  const MELODY = [
-    [0, 76], [2, 79], [4, 81], [6, 79], [7, 76], [8, 74], [10, 76], [12, 72],
-    [16, 76], [18, 79], [20, 81], [22, 84], [23, 81], [24, 79], [26, 81], [28, 79], [30, 76],
-    [32, 72], [34, 74], [36, 76], [38, 79], [40, 76], [42, 74], [44, 72], [46, 74],
-    [48, 76], [50, 79], [52, 81], [54, 84], [55, 81], [56, 79], [58, 76], [60, 74], [62, 72]
-  ];
-  const SONG_END = LEAD_IN + 64 * STEP;
+  const KEYS = { d: 0, f: 1, j: 2, k: 3, arrowleft: 0, arrowdown: 1, arrowup: 2, arrowright: 3 };
+  const TRAVEL = 1150;
+  const WINDOWS = [[50, 'Perfect', 300, 1], [100, 'Great', 200, .7], [150, 'Good', 100, .4]];
+  const BEAT = 400;
 
-  let audio = null;
-  let master = null;
-  let soundOn = true;
+  let context = null;
+  let buffer = null;
+  let source = null;
+  let chart = null;
+  let songStart = 0;
   let notes = [];
-  let startedAt = 0;
-  let frame = 0;
   let playing = false;
+  let frame = 0;
   let stats;
   let geometry;
+  let musicWasOn = false;
 
-  const frequency = midi => 440 * 2 ** ((midi - 69) / 12);
+  const load = (() => {
+    let promise;
+    return () => promise ||= Promise.all([
+      fetch('/assets/media/media.json').then(response => response.json()),
+      fetch('/assets/media/demo-champions-rise.mp3').then(response => response.arrayBuffer())
+    ]).then(([data, audio]) => {
+      chart = data;
+      return audioContext().decodeAudioData(audio);
+    }).then(decoded => { buffer = decoded; });
+  })();
+
+  function audioContext() {
+    if (!context) {
+      const Context = window.AudioContext || window.webkitAudioContext;
+      context = new Context();
+    }
+    return context;
+  }
+
+  // Start fetching once the visitor shows interest, so Play starts instantly.
+  ['pointerenter', 'focusin'].forEach(type => demo.addEventListener(type, () => load().catch(() => {}), { once: true }));
+
+  const songTime = () => (context.currentTime - songStart - (context.outputLatency || 0)) * 1000;
 
   const measure = () => {
-    const fieldBox = field.getBoundingClientRect();
-    geometry = {
-      lineY: line.getBoundingClientRect().top - fieldBox.top + line.offsetHeight / 2,
-      lanes: lanes.map(lane => {
-        const box = lane.getBoundingClientRect();
-        return { left: box.left - fieldBox.left, width: box.width };
-      })
-    };
+    const box = field.getBoundingClientRect();
+    geometry = lanes.map(lane => {
+      const receptor = lane.querySelector('.receptor').getBoundingClientRect();
+      return { left: receptor.left - box.left, size: receptor.width, centerY: receptor.top - box.top + receptor.height / 2 };
+    });
   };
 
-  const ensureAudio = () => {
-    if (audio) return audio.resume();
-    const Context = window.AudioContext || window.webkitAudioContext;
-    if (!Context) return;
-    audio = new Context();
-    master = audio.createGain();
-    master.gain.value = soundOn ? .5 : 0;
-    master.connect(audio.destination);
-  };
-
-  const tone = (midi, when, length = .32, volume = .5) => {
-    if (!audio) return;
-    const time = when ?? audio.currentTime;
-    for (const [type, octave, level] of [['triangle', 1, 1], ['sine', 2, .25]]) {
-      const osc = audio.createOscillator();
-      const gain = audio.createGain();
-      osc.type = type;
-      osc.frequency.value = frequency(midi) * octave;
-      gain.gain.setValueAtTime(0, time);
-      gain.gain.linearRampToValueAtTime(volume * level, time + .008);
-      gain.gain.exponentialRampToValueAtTime(.001, time + length);
-      osc.connect(gain).connect(master);
-      osc.start(time);
-      osc.stop(time + length + .05);
+  const tick = () => {
+    const now = songTime();
+    for (const note of notes) {
+      if (note.judged) continue;
+      const until = note.time - now;
+      if (until > TRAVEL + 100) break;
+      if (until < -WINDOWS[2][0]) {
+        note.judged = true;
+        note.element?.remove();
+        record(null);
+        continue;
+      }
+      const lane = geometry[note.lane];
+      if (!note.element) {
+        note.element = document.createElement('span');
+        note.element.className = `demo-note lane-${note.lane}`;
+        note.element.style.left = `${lane.left}px`;
+        note.element.style.width = `${lane.size}px`;
+        field.insertBefore(note.element, judge);
+      }
+      const y = lane.centerY * (1 - until / TRAVEL) - lane.size / 2;
+      note.element.style.transform = `translateY(${y.toFixed(1)}px)`;
     }
+    // Let the page pulse on the song's beat while the demo plays.
+    const phase = ((now % BEAT) + BEAT) % BEAT / BEAT;
+    document.documentElement.style.setProperty('--beat', Math.max(0, 1 - phase * 3).toFixed(3));
+    if (now > chart.length - 400) finish();
+    else frame = requestAnimationFrame(tick);
   };
 
-  const kick = when => {
-    const osc = audio.createOscillator();
-    const gain = audio.createGain();
-    osc.frequency.setValueAtTime(130, when);
-    osc.frequency.exponentialRampToValueAtTime(45, when + .14);
-    gain.gain.setValueAtTime(.55, when);
-    gain.gain.exponentialRampToValueAtTime(.001, when + .2);
-    osc.connect(gain).connect(master);
-    osc.start(when);
-    osc.stop(when + .22);
-  };
-
-  const scheduleBeat = () => {
-    if (!audio) return;
-    const origin = audio.currentTime + .08;
-    for (let beat = 0; beat * BEAT < SONG_END; beat += 1) {
-      const when = origin + beat * BEAT / 1000;
-      kick(when);
-      // The count-in ticks so you can feel the tempo before the first note.
-      if (beat < 4) tone(beat === 0 ? 84 : 79, when, .08, .18);
+  function record(rating) {
+    if (rating) {
+      const [, label, points, weight] = rating;
+      stats.combo += 1;
+      stats.best = Math.max(stats.best, stats.combo);
+      stats.score += points + Math.min(stats.combo, 50) * 10;
+      stats.weight += weight;
+      stats[label] += 1;
+      showJudge(label, label === 'Perfect' ? 'On beat' : `${stats.combo} combo`);
+    } else {
+      stats.combo = 0;
+      stats.Miss += 1;
+      showJudge('Miss', '');
     }
-    return 80;
-  };
+    stats.judged += 1;
+    scoreLabel.textContent = `Score ${stats.score.toLocaleString()}`;
+    accuracyLabel.textContent = `Acc ${(stats.weight / stats.judged * 100).toFixed(1)}%`;
+  }
 
-  const showJudge = (label, kind) => {
-    judge.textContent = label;
-    judge.className = `demo-judge ${kind}`;
+  function showJudge(label, sub) {
+    judge.className = `demo-judge ${label.toLowerCase()}`;
+    judge.replaceChildren();
+    const strong = document.createElement('strong');
+    strong.textContent = label.toUpperCase();
+    judge.append(strong);
+    if (sub) {
+      const span = document.createElement('span');
+      span.textContent = sub.toUpperCase();
+      judge.append(span);
+    }
     if (!reduceMotion.matches) {
       void judge.offsetWidth;
       judge.classList.add('pop');
     }
-    comboLabel.textContent = stats.combo > 1 ? `${stats.combo} combo` : '';
-    scoreLabel.textContent = `Score ${stats.score.toLocaleString()}`;
-  };
+  }
 
-  const burst = laneIndex => {
+  function burst(laneIndex) {
     if (reduceMotion.matches) return;
-    const lane = geometry.lanes[laneIndex];
+    const lane = geometry[laneIndex];
     const spark = document.createElement('span');
-    spark.className = 'demo-burst';
-    spark.style.left = `${lane.left + lane.width / 2}px`;
-    spark.style.top = `${geometry.lineY}px`;
-    for (let index = 0; index < 8; index += 1) {
-      const petal = document.createElement('i');
-      const angle = (index / 8) * Math.PI * 2 + Math.random() * .5;
-      const distance = 26 + Math.random() * 30;
-      petal.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
-      petal.style.setProperty('--y', `${Math.sin(angle) * distance - 12}px`);
-      petal.style.setProperty('--r', `${Math.random() * 360}deg`);
-      spark.append(petal);
+    spark.className = `demo-burst lane-${laneIndex}`;
+    spark.style.left = `${lane.left + lane.size / 2}px`;
+    spark.style.top = `${lane.centerY}px`;
+    spark.append(document.createElement('b'));
+    for (let index = 0; index < 9; index += 1) {
+      const star = document.createElement('i');
+      const angle = (index / 9) * Math.PI * 2 + Math.random() * .4;
+      const distance = 34 + Math.random() * 30;
+      star.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+      star.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
+      star.style.setProperty('--r', `${Math.random() * 360}deg`);
+      spark.append(star);
     }
     field.append(spark);
-    setTimeout(() => spark.remove(), 650);
-  };
+    setTimeout(() => spark.remove(), 600);
+  }
 
-  const hit = laneIndex => {
+  function click() {
+    const osc = context.createOscillator();
+    const gain = context.createGain();
+    osc.frequency.value = 1800;
+    gain.gain.setValueAtTime(.06, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .05);
+    osc.connect(gain).connect(context.destination);
+    osc.start();
+    osc.stop(context.currentTime + .06);
+  }
+
+  function hit(laneIndex) {
     if (!playing) return;
-    const now = performance.now() - startedAt;
+    const now = songTime();
     let best = null;
     for (const note of notes) {
-      if (note.lane !== laneIndex || note.judged) continue;
+      if (note.judged || note.lane !== laneIndex) continue;
       const offset = Math.abs(note.time - now);
-      if (offset <= WINDOWS[2][0] && (!best || offset < Math.abs(best.time - now))) best = note;
+      if (offset > WINDOWS[2][0]) { if (note.time > now) break; continue; }
+      if (!best || offset < Math.abs(best.time - now)) best = note;
     }
     if (!best) return;
-    const offset = Math.abs(best.time - now);
-    const [, label, points] = WINDOWS.find(([limit]) => offset <= limit);
     best.judged = true;
     best.element?.remove();
-    stats.combo += 1;
-    stats.maxCombo = Math.max(stats.maxCombo, stats.combo);
-    stats.score += points + Math.min(stats.combo, 50) * 10;
-    stats[label] += 1;
-    tone(best.pitch);
+    const offset = Math.abs(best.time - now);
+    record(WINDOWS.find(([limit]) => offset <= limit));
     burst(laneIndex);
-    showJudge(label, label.toLowerCase());
-  };
+    click();
+  }
 
-  const finish = () => {
+  function finish() {
     playing = false;
     cancelAnimationFrame(frame);
+    try { source?.stop(); } catch (_) { /* Already stopped. */ }
     notes.forEach(note => note.element?.remove());
-    judge.textContent = '';
-    comboLabel.textContent = '';
-    const fullCombo = stats.Miss === 0;
-    result.textContent = fullCombo ? 'Full combo!' : `Score ${stats.score.toLocaleString()}`;
-    detail.textContent = `Perfect ${stats.Perfect}, great ${stats.Great}, good ${stats.Good}, miss ${stats.Miss}. Best combo ${stats.maxCombo}. The full game plays your own songs.`;
+    judge.replaceChildren();
+    document.documentElement.style.setProperty('--beat', '0');
+    const total = notes.length;
+    result.textContent = stats.Miss === 0 && stats.judged === total ? 'Full combo!' : `Score ${stats.score.toLocaleString()}`;
+    detail.textContent = `Perfect ${stats.Perfect}, great ${stats.Great}, good ${stats.Good}, miss ${stats.Miss}. Best combo ${stats.best}. In the game, every song you import gets charts like this.`;
     start.textContent = 'Play again';
     overlay.hidden = false;
     start.focus({ preventScroll: true });
-  };
+    if (musicWasOn) window.jsqMusic?.play();
+  }
 
-  const tick = () => {
-    const now = performance.now() - startedAt;
-    for (const note of notes) {
-      if (note.judged) continue;
-      const until = note.time - now;
-      if (until > TRAVEL + 100) continue;
-      if (until < -WINDOWS[2][0]) {
-        note.judged = true;
-        note.element?.remove();
-        stats.combo = 0;
-        stats.Miss += 1;
-        showJudge('Miss', 'miss');
-        continue;
-      }
-      if (!note.element) {
-        const lane = geometry.lanes[note.lane];
-        note.element = document.createElement('span');
-        note.element.className = `demo-note${note.lane % 2 ? ' alt' : ''}`;
-        note.element.style.left = `${lane.left + 5}px`;
-        note.element.style.width = `${lane.width - 10}px`;
-        field.insertBefore(note.element, line);
-      }
-      const y = geometry.lineY * (1 - until / TRAVEL) - 9;
-      note.element.style.transform = `translateY(${y.toFixed(1)}px)`;
+  async function play() {
+    start.disabled = true;
+    start.textContent = 'Loading…';
+    try {
+      await load();
+      await audioContext().resume();
+    } catch (_) {
+      start.disabled = false;
+      start.textContent = 'Play the demo';
+      detail.textContent = 'The demo could not load its song. Check your connection and try again.';
+      return;
     }
-    if (now > SONG_END + 600) finish();
-    else frame = requestAnimationFrame(tick);
-  };
-
-  const play = () => {
-    ensureAudio();
+    musicWasOn = !!window.jsqMusic?.playing;
+    window.jsqMusic?.pause();
     measure();
-    stats = { score: 0, combo: 0, maxCombo: 0, Perfect: 0, Great: 0, Good: 0, Miss: 0 };
-    notes = MELODY.map(([step, pitch]) => ({ time: LEAD_IN + step * STEP, lane: LANE_FOR_PITCH[pitch], pitch, judged: false, element: null }));
-    const delay = scheduleBeat() ?? 80;
-    startedAt = performance.now() + delay;
+    stats = { score: 0, combo: 0, best: 0, weight: 0, judged: 0, Perfect: 0, Great: 0, Good: 0, Miss: 0 };
+    notes = chart.notes.map(([time, lane]) => ({ time, lane, judged: false, element: null }));
     scoreLabel.textContent = 'Score 0';
-    judge.textContent = '';
+    accuracyLabel.textContent = 'Acc 100.0%';
+    judge.replaceChildren();
+    source = context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(context.destination);
+    songStart = context.currentTime + .15;
+    source.start(songStart);
     overlay.hidden = true;
+    start.disabled = false;
     playing = true;
     frame = requestAnimationFrame(tick);
-  };
+    field.focus?.();
+  }
 
   start.addEventListener('click', play);
 
@@ -245,12 +257,13 @@
     if (index !== undefined) lanes[index].classList.remove('is-pressed');
   });
 
-  soundToggle.addEventListener('click', () => {
-    soundOn = !soundOn;
-    soundToggle.setAttribute('aria-pressed', String(soundOn));
-    soundToggle.textContent = soundOn ? 'Sound on' : 'Sound off';
-    if (master) master.gain.value = soundOn ? .5 : 0;
+  window.addEventListener('resize', () => {
+    if (!playing) return;
+    measure();
+    notes.forEach(note => {
+      if (!note.element) return;
+      note.element.style.left = `${geometry[note.lane].left}px`;
+      note.element.style.width = `${geometry[note.lane].size}px`;
+    });
   });
-
-  window.addEventListener('resize', () => { if (playing) measure(); });
 })();

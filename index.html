@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jake Side Quests — Games, experiments & things I build</title>
   <meta name="description" content="Games, experiments, and things Jake couldn’t help building. Explore SENRITSU, a rhythm game for your own music, and SINHS SIS, a school information system.">
-  <meta name="theme-color" content="#0d0f2e">
+  <meta name="theme-color" content="#07061a">
   <link rel="canonical" href="https://jakesidequests.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jake Side Quests">
@@ -19,204 +19,191 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
   <link rel="preload" href="/assets/fonts/delagothicone-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/dotgothic16-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/media/hero-poster.webp" as="image">
   <link rel="stylesheet" href="/assets/site.css">
-  <script src="/assets/site.js"></script>
+  <script>document.documentElement.classList.add('js');window.revealFallback=setTimeout(function(){document.documentElement.classList.add('no-anim')},4000);</script>
+  <script src="/assets/vendor/gsap.min.js" defer></script>
+  <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/vendor/SplitText.min.js" defer></script>
+  <script src="/assets/vendor/lenis.min.js" defer></script>
+  <script src="/assets/site.js" defer></script>
 </head>
-<body id="top">
+<body id="top" data-page="home">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="hud">
-  <div class="hud-inner container">
-    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="40" height="40" alt=""><span class="brand-name">Jake Side Quests</span></a>
-    <p class="hud-area" aria-hidden="true">Area <span data-area-label>Title screen</span></p>
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="44" height="44" alt=""><span class="brand-name">Jake Side Quests</span></a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/#work">Quests</a>
+      <a href="/#work">Work</a>
       <a href="/#about">About</a>
-      <a href="/#say-hello">Say hello</a>
+      <a href="/#say-hello">Say hi</a>
     </nav>
+    <button class="sound-toggle" type="button" aria-pressed="false" data-sound hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="label">Music off</span></button>
   </div>
 </header>
 
 <main id="main">
-  <section class="title-screen" aria-labelledby="hero-title" data-area="Title screen">
-    <canvas class="sky" aria-hidden="true"></canvas>
-    <div class="moon" aria-hidden="true">
-      <span class="moon-halo"></span>
-      <svg class="clouds" viewBox="0 0 600 200"><path fill="#2a1a63" d="M0 150c40-30 90-34 130-14 20-40 80-56 120-24 30-30 90-30 112 8 40-20 96-6 112 30 40-10 86 4 126 30v20H0Z"/><path fill="#3a2280" opacity=".9" d="M60 196c24-26 64-30 92-12 18-30 66-38 94-12 30-18 70-10 86 16H60Z"/></svg>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" data-hero-media>
+      <video muted loop playsinline preload="auto" poster="/assets/media/hero-poster.webp" data-hero-video>
+        <source src="/assets/media/hero.webm" type="video/webm">
+        <source src="/assets/media/hero.mp4" type="video/mp4">
+      </video>
     </div>
-    <div class="ridges" aria-hidden="true">
-      <svg class="ridge-far" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice"><path fill="#3a1f78" d="M0 260 120 190l100 40 140-90 110 70 130-90 120 80 140-50 120 70 140-90 140 80 180-50v240H0Z"/></svg>
-      <svg class="ridge-mid" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice"><path fill="#22175e" d="m0 300 90-40 110 30 130-60 110 50 120-40 140 60 120-50 140 40 120-50 140 50 120-40 100 30v120H0Z"/></svg>
-      <svg class="ridge-near" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice">
-        <g fill="#0d0f2e">
-          <path d="M0 340q360-30 720-5t720-5v70H0Z"/>
-          <path d="m96 342 29-70 29 70Zm40 0 34-86 34 86Zm1180 0 26-60 26 60Zm34 0 30-74 30 74Z"/>
-          <rect x="900" y="300" width="60" height="44"/><path d="m890 303 40-34 40 34Z"/>
-          <rect x="980" y="290" width="52" height="54"/><path d="m970 293 36-32 36 32Z"/>
-          <rect x="1060" y="236" width="36" height="108"/><path d="m1050 240 28-28 28 28Zm4 38 24-14 24 14Z"/>
-          <rect x="1112" y="305" width="72" height="39"/><path d="m1102 308 46-30 46 30Z"/>
-        </g>
-        <g fill="#ffcb47">
-          <rect x="914" y="314" width="9" height="11"/><rect x="938" y="314" width="9" height="11"/>
-          <rect x="994" y="304" width="9" height="11"/><rect x="1012" y="304" width="9" height="11"/>
-          <rect x="1073" y="250" width="9" height="11"/><rect x="1073" y="290" width="9" height="11"/>
-          <rect x="1130" y="318" width="9" height="11"/><rect x="1156" y="318" width="9" height="11"/>
-        </g>
-      </svg>
-    </div>
-    <p class="kana" aria-hidden="true">ジェイクのサイドクエスト</p>
+    <canvas class="petals" aria-hidden="true" data-petals></canvas>
+    <p class="kana-rail" aria-hidden="true">ジェイクのサイドクエスト</p>
 
-    <div class="title-inner container">
-      <h1 id="hero-title" class="title"><span>Jake</span> <span>Side</span> <span>Quests</span></h1>
-      <div class="title-ui">
-        <nav class="window command-window" aria-label="Start menu">
-          <ul class="command" data-command>
-            <li><a class="cursor is-active" href="#work" data-help="See the games and tools I’ve built.">Quest board<span class="visually-hidden">: see what I’ve built</span></a></li>
-            <li><a class="cursor" href="#about" data-help="Meet Jake, the one behind the side quests.">Status<span class="visually-hidden">: about Jake</span></a></li>
-            <li><a class="cursor" href="#say-hello" data-help="Leave feedback, ideas, or a friendly hello.">Inn<span class="visually-hidden">: say hello</span></a></li>
-          </ul>
-          <p class="command-help" aria-hidden="true" data-command-help>See the games and tools I’ve built.</p>
-        </nav>
-        <div class="window dialogue" data-dialogue>
-          <span class="window-tab">Jake</span>
-          <img class="dialogue-portrait" src="/assets/images/jake-portrait.webp" width="320" height="320" alt="">
-          <p data-typewriter>Welcome, traveler. This is where my side quests live: games, experiments, and things I couldn’t help building. A little curiosity goes a long way.</p>
-          <span class="dialogue-next" aria-hidden="true"></span>
-        </div>
+    <div class="hero-inner">
+      <h1 id="hero-title" class="hero-logo" data-hero-logo>
+        <span class="ring" aria-hidden="true"></span><span class="ring two" aria-hidden="true"></span><span class="ring three" aria-hidden="true"></span>
+        <img src="/assets/images/jake-side-quests-emblem.webp" width="1254" height="1254" alt="Jake Side Quests">
+      </h1>
+      <p class="hero-tagline" data-hero-tagline><span class="line">A little curiosity.</span> <span class="line glow">A lot of side quests.</span></p>
+      <p class="hero-sub" data-hero-fade>Games, experiments, and things I couldn’t help building.</p>
+      <div class="hero-actions" data-hero-fade>
+        <a class="btn btn-primary" href="#work" data-magnetic>Explore my work</a>
+        <a class="btn btn-ghost" href="/senritsu/#demo" data-magnetic>Play the SENRITSU demo</a>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <div class="container">
+        <p class="now-showing" aria-live="off"><span>Scenes from SENRITSU</span><strong data-scene>Sakura Afterglow</strong></p>
+        <a class="scroll-cue" href="#intro"><i aria-hidden="true"></i>Scroll</a>
       </div>
     </div>
   </section>
 
-  <figure class="cutscene container">
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee" data-marquee="-1"><div class="marquee-track"><span>Gaming ✦</span><span class="outline">Anime ✦</span><span>Movies ✦</span><span class="outline">Good vibes ✦</span><span>Gaming ✦</span><span class="outline">Anime ✦</span><span>Movies ✦</span><span class="outline">Good vibes ✦</span></div></div>
+    <div class="marquee alt" data-marquee="1"><div class="marquee-track"><span>Side quests ✦</span><span class="outline">Rhythm games ✦</span><span>Web apps ✦</span><span class="outline">Experiments ✦</span><span>Side quests ✦</span><span class="outline">Rhythm games ✦</span><span>Web apps ✦</span><span class="outline">Experiments ✦</span></div></div>
+  </div>
+
+  <section class="statement container" id="intro" aria-label="Introduction">
+    <p data-words>Side quests are the detours you take because they look fun. Mine turned into a <span class="hl">rhythm game</span> you play with your own music, and a <span class="hl-2">school information system</span> built for a senior high school.</p>
+  </section>
+
+  <section class="cutscene" aria-label="Jake’s room" data-cutscene>
     <div class="cutscene-frame">
       <img src="/assets/images/jake-side-quests-banner.webp" width="2033" height="774" alt="An illustrated gaming room at night: Jake plays on the couch beside his cat, with ramen, popcorn, anime figures, and a film clapperboard around him." loading="lazy">
     </div>
-    <figcaption>[controller clicking, the cat purring]</figcaption>
-  </figure>
+    <p class="cutscene-label" aria-hidden="true">Jake’s room, after dark</p>
+    <p class="subtitles" aria-hidden="true"><span>[controller clicking]</span><span>Gaming.</span><span>Anime.</span><span>Movies.</span><span>Good vibes.</span></p>
+  </section>
 
-  <section class="section container" id="work" aria-labelledby="work-title" data-area="Quest board">
-    <header class="section-head">
-      <h2 id="work-title">Quest board</h2>
-      <p class="section-note">Two quests so far, more on the way.</p>
-    </header>
-    <div class="quests">
-      <article class="window quest quest-main" aria-labelledby="senritsu-title">
-        <span class="window-tab">Main quest</span>
-        <div class="lanes" aria-hidden="true">
-          <span class="lanes-mark">旋律</span>
-          <div class="lane"><i style="--y:12%;--d:.2"></i><i style="--y:48%;--d:.8"></i><i style="--y:70%;--d:1.3"></i></div>
-          <div class="lane"><i style="--y:2%;--d:.5"></i><i style="--y:34%;--d:1.1"></i></div>
-          <div class="lane"><i style="--y:20%;--d:0"></i><i style="--y:58%;--d:.65"></i><i style="--y:86%;--d:1.45"></i></div>
-          <div class="lane"><i style="--y:6%;--d:.35"></i><i style="--y:40%;--d:.95"></i></div>
+  <section class="section featured" id="work" aria-labelledby="senritsu-title">
+    <div class="featured-bg" aria-hidden="true" data-parallax="-12"><img src="/assets/media/worlds/hanabi_night.webp" width="720" height="1080" alt="" loading="lazy"></div>
+    <div class="container featured-grid">
+      <div class="featured-copy">
+        <p class="eyebrow-num" data-reveal>Quest 001</p>
+        <div class="app-mark" data-reveal>
+          <img src="/senritsu/icon.png" width="104" height="104" alt="" loading="lazy">
+          <p><span lang="ja">旋律</span>, a rhythm game for Android</p>
         </div>
-        <div class="quest-body">
-          <div class="quest-identity">
-            <img src="/senritsu/icon.png" width="64" height="64" alt="" loading="lazy">
-            <div><h3 id="senritsu-title">SENRITSU</h3><p><span lang="ja">旋律</span>, a rhythm game</p></div>
-          </div>
-          <!-- senritsu:home-summary:start -->
+        <h2 id="senritsu-title" class="glitch" data-text="SENRITSU" data-reveal>SENRITSU</h2>
+        <!-- senritsu:home-summary:start -->
         <p>Turn your own music into rhythm charts. Play 14 included songs, explore 18 anime-inspired themes, and mix note styles and hit effects to find your flow.</p>
 <!-- senritsu:home-summary:end -->
-          <dl class="quest-stats">
-            <div><dt>Platform</dt><dd>Android</dd></div>
-            <div><dt>Genre</dt><dd>Rhythm</dd></div>
-            <div><dt>Connection</dt><dd>Works offline</dd></div>
-          </dl>
-          <div class="quest-actions">
-            <a class="button" href="/senritsu/">Meet SENRITSU</a>
-            <a class="text-link cursor" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Get it on Google Play</a>
-          </div>
+        <ul class="chips" data-reveal><li class="chip">Android</li><li class="chip">Rhythm</li><li class="chip">Works offline</li></ul>
+        <div class="hero-actions" data-reveal>
+          <a class="btn btn-primary" href="/senritsu/" data-magnetic>Meet SENRITSU</a>
+          <a class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu" data-magnetic>Get it on Google Play</a>
         </div>
-      </article>
+      </div>
+      <div class="phones" data-phones aria-label="SENRITSU screenshots">
+        <figure class="phone left"><img src="/assets/media/screens/icons.webp" width="360" height="638" alt="SENRITSU appearance screen with cultural note icons such as parol stars and paper lanterns." loading="lazy"></figure>
+        <figure class="phone right"><img src="/assets/media/screens/effects.webp" width="360" height="638" alt="SENRITSU hit effects screen with starburst and petal bloom options." loading="lazy"></figure>
+        <figure class="phone center"><img src="/assets/media/screens/gameplay.webp" width="360" height="638" alt="SENRITSU gameplay: lightning arrows reach the targets and a PERFECT rating appears." loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
 
-      <article class="window quest quest-side" aria-labelledby="sinhs-title">
-        <span class="window-tab">Side quest</span>
-        <div class="ledger" aria-hidden="true">
-          <img src="/assets/images/sinhs-logo.png" width="112" height="112" alt="" loading="lazy">
-          <ul>
-            <li>Enrollment <span>◎</span></li>
-            <li>Grading <span>◎</span></li>
-            <li>Attendance <span>◎</span></li>
-            <li>School reports <span>◎</span></li>
-          </ul>
-        </div>
-        <div class="quest-body">
-          <div class="quest-identity">
-            <div><h3 id="sinhs-title">SINHS SIS</h3><p>Built for senior high school</p></div>
-          </div>
+  <section class="section worlds" aria-labelledby="worlds-title" data-worlds>
+    <div class="container worlds-head">
+      <h2 id="worlds-title" class="section-title" data-reveal>Play in<br>other worlds</h2>
+      <p class="section-lede" data-reveal>SENRITSU’s themes paint Filipino, Japanese, Chinese, and Korean scenes behind every song. Here are a few.</p>
+    </div>
+    <div class="worlds-pin">
+      <div class="worlds-track" data-worlds-track>
+        <figure class="world"><img src="/assets/media/worlds/sakura_afterglow.webp" width="720" height="1080" alt="A canal at sunset lined with cherry blossoms and lantern-lit wooden houses." loading="lazy"><figcaption><strong>Sakura Afterglow</strong><span>Japanese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/parol_fiesta.webp" width="720" height="1080" alt="A Filipino street at dusk hung with star-shaped parol lanterns." loading="lazy"><figcaption><strong>Parol Fiesta</strong><span>Filipino</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/hanabi_night.webp" width="720" height="1080" alt="Fireworks bloom over a lantern-lit riverside festival." loading="lazy"><figcaption><strong>Hanabi Night</strong><span>Japanese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/crimson_lanterns.webp" width="720" height="1080" alt="A courtyard of red lanterns framing a round moon gate." loading="lazy"><figcaption><strong>Crimson Lanterns</strong><span>Chinese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/palayan_dawn.webp" width="720" height="1080" alt="Rice terraces in the Cordillera mountains glowing at sunrise." loading="lazy"><figcaption><strong>Palayan Dawn</strong><span>Filipino</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/hanok_moonrise.webp" width="720" height="1080" alt="A hanok neighborhood under a full moon." loading="lazy"><figcaption><strong>Hanok Moonrise</strong><span>Korean</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/jade_waterway.webp" width="720" height="1080" alt="A jade-green canal in a water town with a stone bridge." loading="lazy"><figcaption><strong>Jade Waterway</strong><span>Chinese</span></figcaption></figure>
+        <figure class="world"><img src="/assets/media/worlds/seoul_dream.webp" width="720" height="1080" alt="A rainy hillside street overlooking a glowing city at night." loading="lazy"><figcaption><strong>Seoul Dream</strong><span>Korean</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="more-title">
+    <h2 id="more-title" class="section-title" data-reveal>More quests</h2>
+    <div class="quest-grid">
+      <article class="holo holo-sis" data-tilt data-reveal>
+        <img class="seal" src="/assets/images/sinhs-logo.png" width="140" height="140" alt="" loading="lazy">
+        <div class="body">
+          <p class="eyebrow-num">Quest 002</p>
+          <h3>SINHS SIS</h3>
           <p>Less paperwork. More time for teaching. A school information system built for San Isidro National High School’s senior high school, bringing enrollment, grading, attendance, and DepEd school reports together.</p>
-          <dl class="quest-stats">
-            <div><dt>Platform</dt><dd>Web</dd></div>
-            <div><dt>Built with</dt><dd>Django, PostgreSQL, HTMX</dd></div>
-          </dl>
-          <div class="quest-actions">
-            <a class="button" href="https://sinhs.jakesidequests.com/">Visit SINHS SIS</a>
-          </div>
+          <ul class="features"><li>Enrollment</li><li>Grading</li><li>Attendance</li><li>School reports</li></ul>
+          <ul class="chips"><li class="chip">Django</li><li class="chip">PostgreSQL</li><li class="chip">HTMX</li></ul>
+          <a class="btn btn-primary" href="https://sinhs.jakesidequests.com/" data-magnetic>Visit SINHS SIS</a>
         </div>
       </article>
-
-      <div class="quest-locked">
-        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M8 28h48v26H8Z M8 28c0-10 8-16 24-16s24 6 24 16" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M8 34h48M27 30h10v12H27Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+      <div class="holo locked" data-tilt data-reveal>
         <h3>???</h3>
-        <p>A new quest appears soon.</p>
+        <div class="loading-bar" aria-hidden="true"><i></i></div>
+        <p>The next quest is loading.</p>
       </div>
     </div>
   </section>
 
-  <section class="section container" id="about" aria-labelledby="about-title" data-area="Status">
-    <header class="section-head">
-      <h2 id="about-title">About Jake</h2>
-      <p class="section-note">Behind the quests</p>
-    </header>
-    <div class="window status">
-      <span class="window-tab">Status</span>
-      <div class="status-portrait"><img src="/assets/images/jake-portrait.webp" width="320" height="320" alt="Illustrated portrait of Jake, grinning, with headphones around his neck." loading="lazy"></div>
-      <div>
-        <p class="status-name">Jake</p>
-        <p class="status-class">Builder of side quests</p>
-        <dl class="status-list">
+  <section class="section player" id="about" aria-labelledby="about-title">
+    <p class="player-bg-name" aria-hidden="true" data-parallax-x="-20">JAKE</p>
+    <div class="container player-grid">
+      <div class="portrait" data-reveal>
+        <span class="p1" aria-hidden="true">Player 1</span>
+        <img src="/assets/images/jake-portrait.webp" width="320" height="320" alt="Illustrated portrait of Jake, grinning, with headphones around his neck." loading="lazy">
+      </div>
+      <div class="player-copy">
+        <h2 id="about-title" data-reveal>Hey, I’m Jake. I like making things.</h2>
+        <p data-reveal>This is where my side quests find a home: games, small experiments, and ideas that turned into something you can actually use.</p>
+        <p data-reveal>I follow what interests me and build as I go. Sometimes that means a rhythm game. Sometimes it means seeing where the next idea leads.</p>
+        <dl class="stats" data-reveal>
+          <div><dt>Class</dt><dd>Builder of side quests</dd></div>
           <div><dt>Companion</dt><dd>The cat</dd></div>
-          <div><dt>Equipment</dt><dd>Controller, headphones, film reels</dd></div>
           <div><dt>Skills</dt><dd>Android, Django, PostgreSQL, HTMX</dd></div>
-          <div><dt>Into</dt><dd>Gaming, anime, movies, good vibes</dd></div>
+          <div><dt>Into</dt><dd>Gaming, anime, movies</dd></div>
         </dl>
-      </div>
-      <div class="status-bio">
-        <h3>Hey, I’m Jake. I like making things.</h3>
-        <p>This is where my side quests find a home: games, small experiments, and ideas that turned into something you can actually use.</p>
-        <p>I follow what interests me and build as I go. Sometimes that means a rhythm game. Sometimes it means seeing where the next idea leads.</p>
-        <div class="motto">
-          <h4>Current quest</h4>
-          <ul><li>Have fun</li><li>Be kind</li><li>Level up</li></ul>
-        </div>
+        <ul class="motto" aria-label="Current quest" data-reveal><li>Have fun</li><li>Be kind</li><li>Level up</li></ul>
       </div>
     </div>
   </section>
 
-  <section class="section container" id="say-hello" aria-labelledby="contact-title" data-area="Inn">
-    <div class="window inn-window">
-      <span class="window-tab">Inn</span>
-      <div>
-        <h2 id="contact-title">Got a thought? Say hi.</h2>
-        <p>Feedback, ideas, or just a friendly hello. I’m all ears.</p>
-      </div>
-      <ul class="command">
-        <li><a class="cursor is-active" href="https://www.facebook.com/JakeSideQuests">Message me on Facebook</a></li>
-        <li><a class="cursor" href="#top">Back to the title screen</a></li>
-      </ul>
+  <section class="section say-hi" id="say-hello" aria-labelledby="contact-title" data-fireworks>
+    <canvas class="fireworks" aria-hidden="true"></canvas>
+    <div class="say-hi-inner container">
+      <h2 id="contact-title" data-reveal>Say hi.</h2>
+      <p data-reveal>Got a thought? Feedback, ideas, or just a friendly hello. I’m all ears.</p>
+      <a class="btn btn-primary" href="https://www.facebook.com/JakeSideQuests" data-magnetic data-reveal>Message me on Facebook</a>
+      <p class="hint" aria-hidden="true" data-reveal>Click the sky for fireworks.</p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner container">
-    <p class="thanks">Thanks for playing.</p>
-    <div class="footer-row">
-      <p>© 2026 Jake Side Quests</p>
-      <p>A little curiosity goes a long way.</p>
-      <div class="footer-links"><a href="/#work">Quests</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
-    </div>
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="marquee-track" data-marquee="-1"><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span></div>
+  </div>
+  <div class="container footer-row">
+    <p>© 2026 Jake Side Quests</p>
+    <p>A little curiosity goes a long way.</p>
+    <div class="footer-links"><a href="/#work">Work</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
   </div>
 </footer>
+<audio data-music src="/assets/media/champions-rise.mp3" preload="none" loop></audio>
 </body>
 </html>

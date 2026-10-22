@@ -5,35 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page not found | Jake Side Quests</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0d0f2e">
+  <meta name="theme-color" content="#07061a">
   <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="/assets/site.css">
-  <script src="/assets/site.js"></script>
+  <script>document.documentElement.classList.add('js');window.revealFallback=setTimeout(function(){document.documentElement.classList.add('no-anim')},4000);</script>
+  <script src="/assets/vendor/gsap.min.js" defer></script>
+  <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/vendor/SplitText.min.js" defer></script>
+  <script src="/assets/vendor/lenis.min.js" defer></script>
+  <script src="/assets/site.js" defer></script>
 </head>
-<body id="top">
+<body id="top" data-page="lost">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="hud">
-  <div class="hud-inner container">
-    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="40" height="40" alt=""><span class="brand-name">Jake Side Quests</span></a>
-    <p class="hud-area" aria-hidden="true">Area <span>Off the map</span></p>
+<div class="grain" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="44" height="44" alt=""><span class="brand-name">Jake Side Quests</span></a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/#work">Quests</a>
+      <a href="/#work">Work</a>
       <a href="/#about">About</a>
-      <a href="/#say-hello">Say hello</a>
+      <a href="/#say-hello">Say hi</a>
     </nav>
+    <button class="sound-toggle" type="button" aria-pressed="false" data-sound hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="label">Music off</span></button>
   </div>
 </header>
-<main id="main" class="game-over container">
-  <h1>Off the map</h1>
-  <div class="window dialogue">
-    <span class="window-tab">Jake</span>
-    <img class="dialogue-portrait" src="/assets/images/jake-portrait.webp" width="320" height="320" alt="">
-    <div>
-      <p>This page doesn’t exist, or it moved. Where to next?</p>
-      <ul class="command">
-        <li><a class="cursor is-active" href="/">Return to the title screen</a></li>
-        <li><a class="cursor" href="/#work">Open the quest board</a></li>
-      </ul>
+<main id="main" class="lost">
+  <div class="game-hero-bg" aria-hidden="true"><img src="/assets/media/worlds/hanok_moonrise.webp" width="720" height="1080" alt=""></div>
+  <div class="inner">
+    <h1 class="glitch" data-text="Lost?" data-reveal>Lost?</h1>
+    <p data-reveal>This page doesn’t exist, or it moved to another world. Pick where to go next.</p>
+    <div class="hero-actions" data-reveal>
+      <a class="btn btn-primary" href="/" data-magnetic>Back to the start</a>
+      <a class="btn btn-ghost" href="/#work" data-magnetic>See my work</a>
     </div>
   </div>
 </main>

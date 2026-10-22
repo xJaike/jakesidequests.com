@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SENRITSU Privacy Policy | Jake Side Quests</title>
   <meta name="description" content="How SENRITSU, the rhythm game by Jake Side Quests, handles your information.">
-  <meta name="theme-color" content="#0d0f2e">
+  <meta name="theme-color" content="#07061a">
   <link rel="canonical" href="https://jakesidequests.com/senritsu/privacy/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jake Side Quests">
@@ -14,47 +14,51 @@
   <meta property="og:url" content="https://jakesidequests.com/senritsu/privacy/">
   <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
   <link rel="preload" href="/assets/fonts/delagothicone-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/dotgothic16-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
-  <script src="/assets/site.js"></script>
+  <script>document.documentElement.classList.add('js');window.revealFallback=setTimeout(function(){document.documentElement.classList.add('no-anim')},4000);</script>
+  <script src="/assets/vendor/gsap.min.js" defer></script>
+  <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/vendor/SplitText.min.js" defer></script>
+  <script src="/assets/vendor/lenis.min.js" defer></script>
+  <script src="/assets/site.js" defer></script>
 </head>
-<body id="top">
+<body id="top" data-page="privacy">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="hud">
-  <div class="hud-inner container">
-    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="40" height="40" alt=""><span class="brand-name">Jake Side Quests</span></a>
-    <p class="hud-area" aria-hidden="true">Area <span>SENRITSU privacy</span></p>
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="44" height="44" alt=""><span class="brand-name">Jake Side Quests</span></a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/#work" aria-current="location">Quests</a>
+      <a href="/#work" aria-current="location">Work</a>
       <a href="/#about">About</a>
-      <a href="/#say-hello">Say hello</a>
+      <a href="/#say-hello">Say hi</a>
     </nav>
+    <button class="sound-toggle" type="button" aria-pressed="false" data-sound hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="label">Music off</span></button>
   </div>
 </header>
 
 <main id="main">
-  <div class="page-context container">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Quests</a></li><li><a href="/senritsu/">SENRITSU</a></li><li><span aria-current="page">Privacy policy</span></li></ol></nav>
-    <nav class="project-nav" aria-label="SENRITSU navigation"><a href="/senritsu/">Overview</a><a href="/senritsu/privacy/" aria-current="page">Privacy policy</a></nav>
-  </div>
-
-  <section class="page-hero container" aria-labelledby="policy-title">
-    <h1 id="policy-title">SENRITSU <span>Privacy policy</span></h1>
-    <p class="lede">How SENRITSU handles your songs, scores, and information. The details, in plain words.</p>
-    <div class="button-row">
-      <a class="button" href="/senritsu/">Back to SENRITSU</a>
-      <a class="text-link cursor" href="#policy">Read the policy</a>
-    </div>
+  <section class="policy-hero" aria-labelledby="policy-title">
+    <div class="game-hero-bg" aria-hidden="true"><img src="/assets/media/worlds/hanok_moonrise.webp" width="720" height="1080" alt=""></div>
+    <div class="container">
+      <div class="page-context">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Work</a></li><li><a href="/senritsu/">SENRITSU</a></li><li><span aria-current="page">Privacy policy</span></li></ol></nav>
+        <nav class="project-nav" aria-label="SENRITSU navigation"><a href="/senritsu/">Overview</a><a href="/senritsu/privacy/" aria-current="page">Privacy policy</a></nav>
+      </div>
+      <h1 id="policy-title" data-reveal>SENRITSU <span>Privacy policy</span></h1>
+      <p class="lede" data-reveal>How SENRITSU handles your songs, scores, and information. The details, in plain words.</p>
+      <div class="hero-actions" data-reveal>
+        <a class="btn btn-primary" href="#policy">Read the policy</a>
+        <a class="btn btn-ghost" href="/senritsu/">Back to SENRITSU</a>
+      </div>
         <!-- senritsu:policy-meta:start -->
       <p class="page-meta">Updated 20 October 2026 · App: SENRITSU (com.jakesidequests.senritsu) · Developer: Jake Side Quests</p>
 <!-- senritsu:policy-meta:end -->
+    </div>
   </section>
 
-  <section class="section container" id="policy" aria-labelledby="policy-details-title">
-    <header class="section-head">
-      <h2 id="policy-details-title">The privacy policy</h2>
-      <p class="section-note">Your information</p>
-    </header>
+  <section class="section container" id="policy" aria-label="The privacy policy" style="padding-top:40px">
     <div class="policy-layout">
     <!-- senritsu:policy:start -->
     <nav class="policy-nav" aria-label="On this page"><p class="eyebrow">On this page</p><a href="#information-we-collect">Information we collect</a><a href="#songs-you-import">Songs you import</a><a href="#scores-and-settings">Scores and settings</a><a href="#purchases">Purchases</a><a href="#google-play-games-optional">Google Play Games (optional)</a><a href="#ratings">Ratings</a><a href="#sharing-your-results">Sharing your results</a><a href="#permissions">Permissions</a><a href="#children">Children</a><a href="#links">Links</a><a href="#changes">Changes</a><a href="#contact">Contact</a></nav>
@@ -102,28 +106,22 @@
   </section>
 
   <section class="section container" id="say-hello" aria-labelledby="contact-title">
-    <div class="window inn-window">
-      <span class="window-tab">Inn</span>
-      <div>
-        <h2 id="contact-title">Questions about your privacy?</h2>
-        <p>Get in touch with Jake Side Quests for help with SENRITSU.</p>
-      </div>
-      <ul class="command">
-        <li><a class="cursor is-active" href="https://www.facebook.com/JakeSideQuests">Message me on Facebook</a></li>
-        <li><a class="cursor" href="/senritsu/">Back to SENRITSU</a></li>
-      </ul>
+    <div class="holo" data-tilt style="text-align:center;display:grid;justify-items:center;gap:20px">
+      <h2 id="contact-title" class="section-title" style="font-size:clamp(2rem,5vw,3.6rem)">Questions about your privacy?</h2>
+      <p>Get in touch with Jake Side Quests for help with SENRITSU.</p>
+      <a class="btn btn-primary" href="https://www.facebook.com/JakeSideQuests" data-magnetic>Message me on Facebook</a>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner container">
-    <p class="thanks">Thanks for playing.</p>
-    <div class="footer-row">
-      <p>© 2026 Jake Side Quests</p>
-      <p>A little curiosity goes a long way.</p>
-      <div class="footer-links"><a href="/#work">Quests</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
-    </div>
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="marquee-track" data-marquee="-1"><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span><span class="fill">Thanks for playing ✦</span><span>Thanks for playing ✦</span></div>
+  </div>
+  <div class="container footer-row">
+    <p>© 2026 Jake Side Quests</p>
+    <p>A little curiosity goes a long way.</p>
+    <div class="footer-links"><a href="/#work">Work</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
   </div>
 </footer>
 </body>

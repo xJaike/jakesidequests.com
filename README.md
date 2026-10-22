@@ -1,6 +1,6 @@
 # Jake Side Quests
 
-Personal portfolio at [jakesidequests.com](https://jakesidequests.com), styled as a JRPG at night: a title screen, a quest board, a status screen, and an inn. Plain HTML, CSS, and JavaScript with no build step, deployed on Vercel.
+Personal portfolio at [jakesidequests.com](https://jakesidequests.com), built like an anime opening: a Press Start screen, a full-screen montage of SENRITSU's worlds, music that the page pulses to, scroll-driven scenes, and a playable SENRITSU demo. Plain HTML, CSS, and JavaScript with no build step, deployed on Vercel.
 
 ## Preview locally
 
@@ -10,34 +10,45 @@ From the repository root:
 python3 -m http.server 8000
 ```
 
-Open [localhost:8000](http://localhost:8000). Use a local server so the absolute asset and page links resolve correctly. The local server shows its own 404 page; Vercel serves `404.html`.
+Open [localhost:8000](http://localhost:8000). The Press Start screen shows once per browser session; open a new private window to see it again. The local server shows its own 404 page; Vercel serves `404.html`.
 
 ## Deploy
 
-Import the repository in Vercel with the **Other** framework preset, no build command, and the repository root as the output directory. `vercel.json` adds trailing slashes (`/senritsu` → `/senritsu/`) and caching headers. `.vercelignore` keeps the source artwork, scripts, and `CNAME` out of the deployment. Add `jakesidequests.com` under the project's Domains settings; `CNAME` only matters for GitHub Pages.
+The Vercel project `jakesidequests` is connected to this GitHub repository with the **Other** preset and no build command. Every push gets a preview deployment, and pushes to `main` go to production. `vercel.json` adds trailing slashes (`/senritsu` → `/senritsu/`) and caching headers. `.vercelignore` keeps the source artwork, scripts, and `CNAME` out of the deployment.
 
-## Edit the site
+## What's where
 
-- `index.html`: homepage. The title screen, cutscene banner, quest board (`#work`), status screen (`#about`), and inn (`#say-hello`).
-- `senritsu/index.html`: SENRITSU product page with the playable demo.
+- `index.html`: homepage. Hero video, marquees, intro statement, the room cutscene, SENRITSU, the worlds gallery, more quests, Player 1 (about), and Say hi with fireworks.
+- `senritsu/index.html`: SENRITSU page with the playable demo, app screens, features, worlds, and details.
 - `senritsu/privacy/index.html`: published SENRITSU privacy policy.
 - `404.html`: the page Vercel shows for unknown URLs.
-- `assets/site.css`: shared styles. Colors and fonts are tokens on `:root`.
-- `assets/site.js`: the HUD area label, command menu cursor and arrow keys, Jake's typed dialogue, and the night sky. The pages work without JavaScript.
-- `assets/rhythm.js`: the SENRITSU demo (D F J K or tap; each hit plays a note of the melody). Loaded only on the SENRITSU page.
-- `assets/images/jake-portrait.webp`: Jake's face, cropped from `Jake Side Quests Gaming Emblem.png`, for the dialogue box and status screen.
-- `assets/images/jake-side-quests-emblem-96.webp`: small emblem for the header.
-- `assets/images/jake-side-quests-banner.webp`: the cutscene banner and social preview.
+- `assets/site.css`: all styles. Colors and fonts are tokens on `:root`.
+- `assets/site.js`: Press Start, the hero video shader (WebGL ripple and color split under the cursor), sakura petals, music and beat detection, smooth scrolling, scroll scenes, tilt and magnetic hovers, the cursor ring, and fireworks.
+- `assets/rhythm.js`: the SENRITSU demo. Arrows are charted to the beats of a Champion's Rise clip and timed against the audio clock.
+- `assets/vendor/`: GSAP 3.15 (with ScrollTrigger and SplitText, under GreenSock's no-charge standard license) and Lenis 1.3 (MIT), self-hosted.
+- `assets/media/`: generated media (see below).
 
-### The building blocks
+The pages work without JavaScript, and with reduced motion turned on the site shows a still image instead of video and skips the scroll animations. Each script feature only runs when its markup is on the page.
 
-Every panel is a `.window`: a JRPG menu window with a double frame. Give it a `.window-tab` for its label (a speaker name, a quest type). Menus are `.command` lists, and links with the `.cursor` class get the gold pointer on hover and focus. Use `.button` for the main action and `.text-link cursor` for secondary links. Keep the header and footer identical across pages; set the HUD's `Area` text for each page.
+## Media from the SENRITSU repository
 
-To add a project, add an `article.window.quest` to the homepage quest board, before the locked `???` slot.
+`scripts/build_media.py` builds `assets/media/` from `../SENRITSU`:
 
-### Fonts
+- `hero.webm`, `hero.mp4`, `hero-poster.webp`: a 22-second montage of eight cultural theme wallpapers with camera moves and transitions.
+- `worlds/*.webp`: those wallpapers, resized for the galleries.
+- `screens/*.webp`: four phone screens cropped from `design/themes/notes-and-effects-preview.webp`.
+- `champions-rise.mp3`: the first 64 seconds of Champion's Rise, the site's background music.
+- `demo-champions-rise.mp3` and the chart in `media.json`: a 30-second clip for the demo, with notes placed on the song's 150 BPM grid where the music has strong onsets.
 
-Dela Gothic One (titles), DotGothic16 (the game's voice), and Zen Kaku Gothic New (reading text) are self-hosted in `assets/fonts/`, under the SIL Open Font License. They are subset to the characters the pages use, so they stay small. Any new character outside ASCII and Latin-1, such as new Japanese text, falls back to a system font until you subset the fonts again:
+Credits for the wallpapers and music are in `../SENRITSU/ASSET_CREDITS.md`. Rebuild with ffmpeg (libvpx-vp9, libopenh264, libmp3lame) and Pillow:
+
+```sh
+python3 scripts/build_media.py
+```
+
+## Fonts
+
+Dela Gothic One (titles) and Zen Kaku Gothic New (everything else) are self-hosted in `assets/fonts/` under the SIL Open Font License. They are subset to the characters the pages and scripts use. Any new character outside ASCII and Latin-1, such as new Japanese text, falls back to a system font until you subset the fonts again:
 
 ```sh
 python3 scripts/subset_fonts.py .
