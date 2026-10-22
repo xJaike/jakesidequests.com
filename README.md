@@ -14,7 +14,9 @@ Open [localhost:8000](http://localhost:8000). The Press Start screen shows once 
 
 ## Deploy
 
-The Vercel project `jakesidequests` is connected to this GitHub repository with the **Other** preset and no build command. Every push gets a preview deployment, and pushes to `main` go to production. `vercel.json` adds trailing slashes (`/senritsu` → `/senritsu/`) and caching headers. `.vercelignore` keeps the source artwork, scripts, and `CNAME` out of the deployment.
+The Vercel project `jakesidequests` is connected to this GitHub repository with the **Other** preset and no build command. Every push gets a preview deployment, and pushes to `main` go to production at [jakesidequests.com](https://jakesidequests.com). `vercel.json` adds trailing slashes (`/senritsu` → `/senritsu/`), caching headers, and a permanent redirect from `jakesidequests.vercel.app` to the custom domain; `www.jakesidequests.com` redirects there too, set in the project's Domains settings. `.vercelignore` keeps the source artwork and scripts out of the deployment.
+
+DNS is on Cloudflare: an A record for `@` pointing to `76.76.21.21` and a CNAME for `www` pointing to `cname.vercel-dns.com`, both DNS only (not proxied), so Vercel can issue the HTTPS certificate. `sinhs` is a separate record for the SINHS SIS app. The site is no longer published with GitHub Pages.
 
 ## What's where
 

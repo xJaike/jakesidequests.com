@@ -33,5 +33,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "jakesidequests.vercel.app"
+        }
+      ],
+      "destination": "https://jakesidequests.com/:path*",
+      "permanent": true
+    }
   ]
 }
