@@ -1,6 +1,6 @@
 # Jake Side Quests
 
-Personal portfolio at [jakesidequests.com](https://jakesidequests.com), hosted on GitHub Pages. Plain HTML, CSS, and JavaScript; no build step or package installation required.
+Personal portfolio at [jakesidequests.com](https://jakesidequests.com), styled as a JRPG at night: a title screen, a quest board, a status screen, and an inn. Plain HTML, CSS, and JavaScript with no build step, deployed on Vercel.
 
 ## Preview locally
 
@@ -10,32 +10,38 @@ From the repository root:
 python3 -m http.server 8000
 ```
 
-Open [localhost:8000](http://localhost:8000). Use a local server so the absolute asset and page links resolve correctly.
+Open [localhost:8000](http://localhost:8000). Use a local server so the absolute asset and page links resolve correctly. The local server shows its own 404 page; Vercel serves `404.html`.
+
+## Deploy
+
+Import the repository in Vercel with the **Other** framework preset, no build command, and the repository root as the output directory. `vercel.json` adds trailing slashes (`/senritsu` → `/senritsu/`) and caching headers. `.vercelignore` keeps the source artwork, scripts, and `CNAME` out of the deployment. Add `jakesidequests.com` under the project's Domains settings; `CNAME` only matters for GitHub Pages.
 
 ## Edit the site
 
-- `index.html`: homepage, selected projects, about, and contact.
-- `senritsu/index.html`: SENRITSU product page.
+- `index.html`: homepage. The title screen, cutscene banner, quest board (`#work`), status screen (`#about`), and inn (`#say-hello`).
+- `senritsu/index.html`: SENRITSU product page with the playable demo.
 - `senritsu/privacy/index.html`: published SENRITSU privacy policy.
-- `assets/site.css`: shared styles, responsive layouts, and both themes.
-- `assets/site.js`: theme selection and persistence. The site content and navigation also work without JavaScript.
-- `assets/fonts/`: self-hosted DM Sans and Space Grotesk, with their licenses.
-- `assets/images/sinhs-logo.png`: SINHS school seal used in the SINHS SIS project card, copied from that project's static assets.
-- `assets/images/jake-side-quests-banner.webp`: homepage banner and social preview, optimized from `Jake Side Quests.png`.
-- `assets/images/jake-side-quests-emblem.webp`: shared header logo and homepage emblem, optimized from `Jake Side Quests Gaming Emblem.png`.
-- `assets/favicon.png`: 64px gaming emblem for browser tabs. The original brand PNGs remain in the repository root.
+- `404.html`: the page Vercel shows for unknown URLs.
+- `assets/site.css`: shared styles. Colors and fonts are tokens on `:root`.
+- `assets/site.js`: the HUD area label, command menu cursor and arrow keys, Jake's typed dialogue, and the night sky. The pages work without JavaScript.
+- `assets/rhythm.js`: the SENRITSU demo (D F J K or tap; each hit plays a note of the melody). Loaded only on the SENRITSU page.
+- `assets/images/jake-portrait.webp`: Jake's face, cropped from `Jake Side Quests Gaming Emblem.png`, for the dialogue box and status screen.
+- `assets/images/jake-side-quests-emblem-96.webp`: small emblem for the header.
+- `assets/images/jake-side-quests-banner.webp`: the cutscene banner and social preview.
 
-Selected work currently features SENRITSU and SINHS SIS. The SINHS SIS card links to [the school information system](https://sinhs.jakesidequests.com/) and summarizes its enrollment, grading, attendance, and school-report workflows.
+### The building blocks
 
-To feature another project, add an article alongside the existing `.project-card` in the homepage’s `#work` section. Keep project details and links accurate and provide descriptive text for meaningful images.
+Every panel is a `.window`: a JRPG menu window with a double frame. Give it a `.window-tab` for its label (a speaker name, a quest type). Menus are `.command` lists, and links with the `.cursor` class get the gold pointer on hover and focus. Use `.button` for the main action and `.text-link cursor` for secondary links. Keep the header and footer identical across pages; set the HUD's `Area` text for each page.
 
-## Keep pages consistent
+To add a project, add an `article.window.quest` to the homepage quest board, before the locked `???` slot.
 
-Use the homepage as the design reference for every project and supporting page. Reuse `.hero` for introductions, `.hero-art` for the illustrated card, `.section-heading` for section titles, `.project-card` for showcases, `.contact` for contact panels, and the shared button/link classes. Colors, type sizes, spacing, and corner radii are defined in `assets/site.css`; avoid page-specific replacements for these patterns.
+### Fonts
 
-Keep the site header and footer identical across routes. Project pages can add `.page-context` with breadcrumbs and `.project-nav` for their own sections. Product policies belong to the corresponding project: SENRITSU’s privacy policy is linked from its game pages, never the homepage or shared site footer. New projects should link to their own applicable policies.
+Dela Gothic One (titles), DotGothic16 (the game's voice), and Zen Kaku Gothic New (reading text) are self-hosted in `assets/fonts/`, under the SIL Open Font License. They are subset to the characters the pages use, so they stay small. Any new character outside ASCII and Latin-1, such as new Japanese text, falls back to a system font until you subset the fonts again:
 
-The `CNAME` file retains the custom domain. Publish changes through the repository’s existing GitHub Pages workflow.
+```sh
+python3 scripts/subset_fonts.py .
+```
 
 ## Sync SENRITSU with the Android app
 
@@ -50,6 +56,7 @@ python3 ../SENRITSU/scripts/sync_website.py --website . --check
 The check reports drift without changing files. The sync updates marked SENRITSU homepage and
 product content, product meta descriptions, the privacy policy and its table of contents, and the
 icon. It also updates the app's store song catalog and appearance copy. Keep the `<!-- senritsu:… -->` markers intact.
+The styles for the synced markup (`.feature-grid`, `.feature`, `.feature-number`, `.page-meta`, `.policy-nav`, `.policy-content`) live in `assets/site.css`.
 Edit feature wording in `../SENRITSU/design/website/features.html` and privacy wording in
 `../SENRITSU/design/play-store/privacy-policy.html`, then sync again. App counts and settings come
 from the Kotlin source, so the website cannot keep advertising an obsolete theme count.

@@ -5,74 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SENRITSU — Your music. Your rhythm. | Jake Side Quests</title>
   <meta name="description" content="SENRITSU turns your music into a rhythm game for Android. 14 included songs, 18 themes, 29 note styles, and 6 hit effects. No ads; gameplay works offline.">
-  <meta name="theme-color" content="#f7f6f0">
+  <meta name="theme-color" content="#0d0f2e">
   <link rel="canonical" href="https://jakesidequests.com/senritsu/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jake Side Quests">
   <meta property="og:title" content="SENRITSU — Your music. Your rhythm. | Jake Side Quests">
   <meta property="og:description" content="SENRITSU turns your music into a rhythm game for Android. 14 included songs, 18 themes, 29 note styles, and 6 hit effects. No ads; gameplay works offline.">
   <meta property="og:url" content="https://jakesidequests.com/senritsu/">
+  <meta property="og:image" content="https://jakesidequests.com/senritsu/icon.png">
   <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="64x64">
-  <script src="/assets/site.js"></script>
-  <link rel="preload" href="/assets/fonts/spacegrotesk.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/assets/fonts/delagothicone-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/dotgothic16-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/site.js"></script>
+  <script src="/assets/rhythm.js" defer></script>
 </head>
-<body>
+<body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header container">
-  <a class="brand" href="/" aria-label="Jake Side Quests home"><img class="brand-mark" src="/assets/images/jake-side-quests-emblem.webp" width="48" height="48" alt=""><span class="brand-name">jake<span>side quests.</span></span></a>
-  <nav class="site-nav" aria-label="Main navigation">
-    <a href="/#work">Work</a>
-    <a href="/#about">About</a>
-    <a class="nav-external" href="/#say-hello">Say hello <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <button class="theme-toggle" type="button" aria-label="Switch theme">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </button>
-  </nav>
+<header class="hud">
+  <div class="hud-inner container">
+    <a class="brand" href="/" aria-label="Jake Side Quests home"><img src="/assets/images/jake-side-quests-emblem-96.webp" width="40" height="40" alt=""><span class="brand-name">Jake Side Quests</span></a>
+    <p class="hud-area" aria-hidden="true">Area <span>SENRITSU</span></p>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/#work" aria-current="location">Quests</a>
+      <a href="/#about">About</a>
+      <a href="/#say-hello">Say hello</a>
+    </nav>
+  </div>
 </header>
-<main id="main" class="container">
-<div class="page-context">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Work</a></li><li><span aria-current="page">SENRITSU</span></li></ol></nav>
+
+<main id="main">
+  <div class="page-context container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/#work">Quests</a></li><li><span aria-current="page">SENRITSU</span></li></ol></nav>
     <nav class="project-nav" aria-label="SENRITSU navigation"><a href="/senritsu/" aria-current="page">Overview</a><a href="/senritsu/privacy/">Privacy policy</a></nav>
   </div>
-  <section class="hero" aria-labelledby="app-title">
-    <div>
-      <p class="eyebrow"><span class="dot"></span> 001 / Android rhythm game</p>
-      <h1 id="app-title">SENRITSU.<br><em>Find your flow.</em></h1>
-      <p class="hero-description">Your favorite songs. A whole new way to play. Turn your own music into rhythm charts and find your flow, one beat at a time.</p>
-      <div class="tags"><span class="tag">Android</span><span class="tag">Rhythm</span><span class="tag">Works offline</span></div>
-      <div class="button-row"><a class="button button-solid" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Get it on Google Play <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="text-link" href="#features" data-direction="down">Explore the game <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-      <!-- senritsu:summary:start -->
+
+  <section class="stage container" aria-labelledby="app-title">
+    <div class="stage-inner">
+      <div class="stage-copy">
+        <div class="app-title">
+          <img src="/senritsu/icon.png" width="512" height="512" alt="SENRITSU app icon">
+          <div><h1 id="app-title">SENRITSU</h1><p class="app-kana"><span lang="ja">旋律</span> means “melody”</p></div>
+        </div>
+        <p class="lede">Your favorite songs. A whole new way to play. Turn your own music into rhythm charts and find your flow, one beat at a time.</p>
+        <ul class="tags" aria-label="At a glance"><li class="tag">Android</li><li class="tag">Rhythm</li><li class="tag">Works offline</li></ul>
+        <div class="button-row">
+          <a class="button" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Get it on Google Play</a>
+          <a class="text-link cursor" href="#features">Explore the game</a>
+        </div>
+        <!-- senritsu:summary:start -->
       <p class="page-meta">2 song imports free. No ads. Gameplay works offline.</p>
 <!-- senritsu:summary:end -->
-    </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="orbit"></div>
-      <div class="idea-card"></div>
-      <img class="project-art-icon" src="/senritsu/icon.png" width="220" height="220" alt="">
-      <span class="art-note">↗ your music. your rhythm.</span>
-      <svg class="art-spark one" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M1 12h22M4 4l16 16M4 20 20 4" stroke="currentColor" stroke-width="1.5"/></svg><span class="art-spark two">+</span>
-      <span class="art-caption">001 / SENRITSU</span>
+      </div>
+
+      <div class="window demo" data-demo>
+        <span class="window-tab">Try a few beats</span>
+        <div class="demo-field" data-demo-field>
+          <button class="demo-lane" type="button" data-lane="0" aria-label="Lane 1, key D"><kbd>D</kbd></button>
+          <button class="demo-lane" type="button" data-lane="1" aria-label="Lane 2, key F"><kbd>F</kbd></button>
+          <button class="demo-lane" type="button" data-lane="2" aria-label="Lane 3, key J"><kbd>J</kbd></button>
+          <button class="demo-lane" type="button" data-lane="3" aria-label="Lane 4, key K"><kbd>K</kbd></button>
+          <div class="demo-line" aria-hidden="true"></div>
+          <p class="demo-judge" data-judge aria-hidden="true"></p>
+          <p class="demo-combo" data-combo aria-hidden="true"></p>
+          <div class="demo-overlay" data-overlay>
+            <p class="demo-result" data-result aria-live="polite">Ready?</p>
+            <p data-result-detail>Tap a lane when a note crosses the line, or press D, F, J, and K. Each hit plays a note of the melody.</p>
+            <button class="button" type="button" data-start>Play the demo</button>
+          </div>
+        </div>
+        <div class="demo-bar">
+          <span data-score>Score 0</span>
+          <button type="button" data-sound aria-pressed="true">Sound on</button>
+        </div>
+      </div>
     </div>
   </section>
-  <section class="features" id="features" aria-labelledby="features-title">
-    <div class="section-heading"><div><p class="eyebrow">01 / Made for your music</p><h2 id="features-title">Get into the flow<span class="accent">.</span></h2></div><span class="section-count">BUILT BY JAKE ↗</span></div>
-    <article class="project-card">
-      <div class="project-copy">
-        <span class="project-label">SENRITSU / The experience</span>
-        <div class="project-identity"><img class="app-icon" src="/senritsu/icon.png" width="58" height="58" alt="" loading="lazy"><div><h3>Your music. Your rhythm.</h3><p>旋律 · Made to be played</p></div></div>
+
+  <section class="section container" id="features" aria-labelledby="features-title">
+    <header class="section-head">
+      <h2 id="features-title">Get into the flow</h2>
+      <p class="section-note">Made for your music</p>
+    </header>
+    <article class="window quest experience" aria-labelledby="experience-title">
+      <span class="window-tab">The experience</span>
+      <div>
+        <h3 id="experience-title">Your music. Your rhythm.</h3>
         <!-- senritsu:experience:start -->
         <p>Tap and hold the notes as they reach the targets. Start with 14 included songs, or bring your own music and make every beat your own.</p>
 <!-- senritsu:experience:end -->
-        <a class="text-link" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Play SENRITSU <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="text-link cursor" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Play SENRITSU</a>
       </div>
-    <div class="rhythm-art" aria-hidden="true">
-      <div class="rhythm-mini">旋律 / FIND YOUR FLOW</div>
-      <div class="rhythm-grid"><div class="rhythm-lane"><span class="rhythm-note" style="top:10%"></span><span class="rhythm-note" style="top:47%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:1%"></span><span class="rhythm-note" style="top:33%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:17%"></span><span class="rhythm-note" style="top:56%"></span><span class="rhythm-note outline" style="top:78%"></span></div><div class="rhythm-lane"><span class="rhythm-note" style="top:5%"></span><span class="rhythm-note" style="top:40%"></span><span class="rhythm-note outline" style="top:78%"></span></div></div>
-      <div class="rhythm-line"></div>
-      <div class="rhythm-wordmark">SENRITSU <span>YOUR MUSIC. YOUR RHYTHM.</span></div>
-    </div>
+      <p class="experience-kana" aria-hidden="true">旋律</p>
     </article>
     <!-- senritsu:features:start -->
     <div class="feature-grid">
@@ -85,25 +109,53 @@
     </div>
 <!-- senritsu:features:end -->
   </section>
-  <section class="details-section" aria-labelledby="details-title">
-    <div class="section-heading"><div><p class="eyebrow">02 / The useful details</p><h2 id="details-title">A little more to know<span class="accent">.</span></h2></div></div>
+
+  <section class="section container" aria-labelledby="details-title">
+    <header class="section-head">
+      <h2 id="details-title">A little more to know</h2>
+    </header>
     <div class="detail-grid">
-      <article><h3>More music. One purchase.</h3><!-- senritsu:pro:start -->
+      <article class="window">
+        <span class="window-tab">Shop</span>
+        <h3>More music. One purchase.</h3>
+        <!-- senritsu:pro:start -->
 <p>Your first 2 song imports are free. SENRITSU Pro unlocks unlimited imports with one purchase, no subscription. Themes, note styles, and hit effects are free for everyone.</p>
-<!-- senritsu:pro:end --><a class="text-link" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Find SENRITSU on Google Play <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></article>
-      <article><h3>Your music stays yours.</h3><p>Learn how SENRITSU handles your songs, scores, purchases, and optional Google Play Games features.</p><a class="text-link" href="/senritsu/privacy/">Read the SENRITSU privacy policy <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></article>
+<!-- senritsu:pro:end -->
+        <a class="text-link cursor" href="https://play.google.com/store/apps/details?id=com.jakesidequests.senritsu">Find SENRITSU on Google Play</a>
+      </article>
+      <article class="window">
+        <span class="window-tab">Privacy</span>
+        <h3>Your music stays yours.</h3>
+        <p>Learn how SENRITSU handles your songs, scores, purchases, and optional Google Play Games features.</p>
+        <a class="text-link cursor" href="/senritsu/privacy/">Read the SENRITSU privacy policy</a>
+      </article>
     </div>
   </section>
-  <section class="contact" id="say-hello" aria-labelledby="contact-title">
-    <div><p class="eyebrow">Good things start with a hello</p><h2 id="contact-title">A little help with SENRITSU?</h2><p>Questions, feedback, or a song you can’t stop playing. I’m all ears.</p></div>
-    <a class="button button-solid" href="https://www.facebook.com/JakeSideQuests">Let’s connect <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+  <section class="section container" id="say-hello" aria-labelledby="contact-title">
+    <div class="window inn-window">
+      <span class="window-tab">Inn</span>
+      <div>
+        <h2 id="contact-title">A little help with SENRITSU?</h2>
+        <p>Questions, feedback, or a song you can’t stop playing. I’m all ears.</p>
+      </div>
+      <ul class="command">
+        <li><a class="cursor is-active" href="https://www.facebook.com/JakeSideQuests">Message me on Facebook</a></li>
+        <li><a class="cursor" href="/#work">Back to all quests</a></li>
+      </ul>
+    </div>
   </section>
-  <a class="text-link back-link" href="/#work" data-direction="back"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12H4m6-6-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Back to all work</a>
 </main>
-<footer class="site-footer container">
-  <p>© 2026 Jake Side Quests</p>
-  <p>A little curiosity goes a long way.</p>
-  <div class="footer-links"><a href="/#work">Work</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook ↗</a></div>
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <p class="thanks">Thanks for playing.</p>
+    <div class="footer-row">
+      <p>© 2026 Jake Side Quests</p>
+      <p>A little curiosity goes a long way.</p>
+      <div class="footer-links"><a href="/#work">Quests</a><a href="/#about">About</a><a href="https://www.facebook.com/JakeSideQuests">Facebook</a></div>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
