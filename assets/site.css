@@ -142,7 +142,7 @@ button { font: inherit; color: inherit; }
 
 .hero {
   position: relative;
-  height: 100svh; min-height: 640px;
+  min-height: 100svh;
   display: grid; place-items: center;
   overflow: hidden;
   isolation: isolate;
@@ -164,10 +164,10 @@ button { font: inherit; color: inherit; }
   opacity: .5;
 }
 .petals { position: absolute; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
-.hero-inner { position: relative; z-index: 2; display: grid; justify-items: center; gap: clamp(18px, 3vh, 28px); text-align: center; padding: 96px var(--gutter) 120px; }
+.hero-inner { position: relative; z-index: 2; display: grid; justify-items: center; gap: clamp(12px, 2.6svh, 28px); text-align: center; padding: max(88px, 11svh) var(--gutter) max(104px, 13svh); }
 .hero-logo {
   position: relative;
-  width: clamp(200px, 34vmin, 380px);
+  width: clamp(116px, min(34vmin, 31svh), 24rem);
   aspect-ratio: 1;
   transform-style: preserve-3d;
   transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
@@ -179,14 +179,14 @@ button { font: inherit; color: inherit; }
 .hero-logo .ring.three { inset: -24%; border: 1px solid transparent; border-bottom-color: var(--magenta); animation-duration: 14s; filter: drop-shadow(0 0 6px var(--magenta)); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .hero-tagline {
-  font: 400 clamp(2rem, 6.2vw, 5.4rem)/.98 var(--display);
+  font: 400 clamp(1.7rem, min(6.2vw, 8.6svh), 5.4rem)/.98 var(--display);
   letter-spacing: -.01em;
   text-shadow: 0 4px 30px rgb(7 6 26 / .8);
   max-width: 14ch;
 }
 .hero-tagline .line { display: block; }
 .hero-tagline .glow { color: #ff6fb1; text-shadow: 0 0 28px rgb(255 46 136 / .75), 0 4px 30px rgb(7 6 26 / .8); }
-.hero-sub { max-width: 44ch; font-size: clamp(1rem, 1.6vw, 1.25rem); color: rgb(244 241 255 / .9); text-shadow: 0 2px 16px rgb(7 6 26 / .9); }
+.hero-sub { max-width: 44ch; font-size: clamp(.9375rem, min(1.6vw, 2.4svh), 1.25rem); color: rgb(244 241 255 / .9); text-shadow: 0 2px 16px rgb(7 6 26 / .9); }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 6px; }
 .featured-copy .hero-actions, .game-copy .hero-actions { justify-content: start; }
 .kana-rail {
@@ -273,7 +273,7 @@ button { font: inherit; color: inherit; }
 .app-mark { display: flex; align-items: center; gap: 20px; }
 .app-mark img { width: clamp(76px, 8vw, 104px); height: auto; border-radius: 24%; box-shadow: 0 0 0 2px rgb(255 255 255 / .8), 0 0 40px rgb(255 46 136 / .6); }
 .app-mark p { font-size: .9375rem; color: var(--mist); }
-.glitch { position: relative; display: inline-block; font: 400 clamp(2.8rem, 6.2vw, 5.8rem)/.9 var(--display); letter-spacing: -.02em; }
+.glitch { position: relative; display: inline-block; font: 400 clamp(2.1rem, 10.5vw, 5.8rem)/.9 var(--display); letter-spacing: -.02em; }
 .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; opacity: 0; }
 .glitch::before { color: var(--cyan); transform: translate(-3px, 0); clip-path: inset(10% 0 55% 0); }
 .glitch::after { color: var(--magenta); transform: translate(3px, 0); clip-path: inset(55% 0 8% 0); }
@@ -284,7 +284,7 @@ button { font: inherit; color: inherit; }
 .phones { position: relative; height: clamp(460px, 48vw, 640px); perspective: 1400px; }
 .phone {
   position: absolute; left: 50%; top: 50%;
-  width: clamp(190px, 19vw, 260px);
+  width: clamp(190px, 19vw, 16.25rem);
   aspect-ratio: 360 / 638;
   translate: -50% -50%;
   border-radius: 28px;
@@ -306,7 +306,7 @@ button { font: inherit; color: inherit; }
 .worlds-track { display: flex; gap: clamp(16px, 2vw, 28px); padding-inline: var(--gutter); width: max-content; }
 .world {
   position: relative; flex: none;
-  width: clamp(240px, 26vw, 380px);
+  width: clamp(240px, 26vw, 24rem);
   aspect-ratio: 2 / 3;
   border-radius: 22px;
   overflow: hidden;
@@ -369,7 +369,7 @@ button { font: inherit; color: inherit; }
 .player { overflow: hidden; isolation: isolate; }
 .player-bg-name { position: absolute; left: 50%; top: 50%; z-index: -1; transform: translate(-50%, -50%); font: 400 clamp(10rem, 34vw, 30rem)/.8 var(--display); color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / .08); white-space: nowrap; pointer-events: none; }
 .player-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
-.portrait { position: relative; width: min(100%, 440px); aspect-ratio: 1; justify-self: center; }
+.portrait { position: relative; width: min(100%, 27.5rem); aspect-ratio: 1; justify-self: center; }
 .portrait::before { content: ""; position: absolute; inset: -6px; border-radius: 34px; background: conic-gradient(from var(--angle, 0deg), var(--cyan), var(--magenta), var(--gold), var(--cyan)); animation: rotate-angle 6s linear infinite; }
 .portrait::after { content: ""; position: absolute; inset: -40px; z-index: -1; border-radius: 50%; background: radial-gradient(circle, rgb(255 46 136 / .45), transparent 65%); filter: blur(20px); }
 @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
@@ -434,7 +434,7 @@ button { font: inherit; color: inherit; }
 .lede { max-width: 46ch; font-size: clamp(1.125rem, 1.6vw, 1.3125rem); line-height: 1.7; color: rgb(244 241 255 / .92); }
 
 /* The playable demo, styled after the game's own screen */
-.demo { position: relative; justify-self: center; width: min(100%, 400px, calc(66svh * 9 / 16 + 20px)); }
+.demo { position: relative; justify-self: center; width: min(100%, 25rem, calc(66svh * 9 / 16 + 20px)); }
 .demo-screen {
   position: relative;
   aspect-ratio: 9 / 16;
@@ -549,7 +549,19 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Responsive ---------- */
 
+@media (min-width: 1001px) {
+  .glitch { font-size: clamp(3rem, 5.2vw, 5.8rem); }
+}
+@media (min-width: 1900px) {
+  html { font-size: 18px; }
+  :root { --max: 1560px; }
+}
+@media (min-width: 2400px) {
+  html { font-size: 20px; }
+  :root { --max: 1800px; }
+}
 @media (max-width: 1000px) {
+  .demo { width: min(100%, 22.5rem, max(240px, calc(86svh * 9 / 16 + 20px))); }
   .featured-grid, .player-grid, .game-hero-grid { grid-template-columns: 1fr; }
   .quest-grid { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -571,6 +583,18 @@ button { font: inherit; color: inherit; }
   .phones { height: 420px; }
   .phone { width: 170px; }
   .phones { --off: 52%; }
+}
+
+@media (max-width: 400px) {
+  .header-inner { gap: 8px; }
+  .brand img { width: 38px; height: 38px; }
+  .site-nav { gap: 0; padding: 4px; }
+  .site-nav a { padding: 7px 9px; font-size: .8125rem; white-space: nowrap; }
+  .sound-toggle { padding: 8px 10px; }
+}
+@media (max-height: 560px) {
+  .kana-rail, .now-showing { display: none; }
+  .hero-foot { bottom: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -325,7 +325,8 @@
     const hero = wrap.parentElement;
 
     const resize = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      // The video is 1280 px wide, so drawing past ~1920 px only costs GPU time on big screens.
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.5, 1920 / hero.clientWidth);
       canvas.width = hero.clientWidth * ratio;
       canvas.height = hero.clientHeight * ratio;
       gl.viewport(0, 0, canvas.width, canvas.height);
