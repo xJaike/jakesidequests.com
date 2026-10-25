@@ -326,7 +326,7 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Holo cards ---------- */
 
-.quest-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px; margin-top: clamp(40px, 5vw, 64px); }
+.quest-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: clamp(40px, 5vw, 64px); }
 .holo {
   position: relative;
   border-radius: 28px;
@@ -351,12 +351,13 @@ button { font: inherit; color: inherit; }
 .holo:hover { box-shadow: inset 0 0 0 1px rgb(255 255 255 / .28), 0 50px 100px -40px rgb(0 0 0 / 1), 0 0 60px rgb(61 232 255 / .15); }
 .holo h3 { font: 400 clamp(2rem, 4vw, 3.2rem)/1 var(--display); }
 .holo p { max-width: 52ch; color: rgb(244 241 255 / .88); }
-.holo-sis { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 32px; align-items: start; }
-.holo-sis .seal { width: clamp(96px, 10vw, 140px); border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgb(255 255 255 / .2), 0 0 40px rgb(61 232 255 / .35); }
-.holo-sis .body { display: grid; gap: 18px; justify-items: start; }
-.holo-sis ul.features { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.holo-sis ul.features li { display: flex; align-items: center; gap: 8px; font-weight: 500; }
-.holo-sis ul.features li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); transform: rotate(45deg); }
+.holo-quest { display: grid; gap: 28px; align-content: start; }
+.holo-quest .seal { width: clamp(88px, 8vw, 120px); border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgb(255 255 255 / .2), 0 0 40px rgb(61 232 255 / .35); }
+.holo-quest .seal.app-icon { border-radius: 24%; background: none; box-shadow: 0 0 0 1px rgb(255 255 255 / .18), 0 0 40px rgb(61 232 255 / .3); }
+.holo-quest .body { display: grid; gap: 18px; justify-items: start; }
+.holo-quest ul.features { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.holo-quest ul.features li { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.holo-quest ul.features li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); transform: rotate(45deg); }
 .locked { display: grid; place-content: center; justify-items: center; gap: 14px; text-align: center; min-height: 320px; background: repeating-linear-gradient(135deg, rgb(255 255 255 / .03) 0 14px, transparent 14px 28px), #0d0a26; }
 .locked h3 { font-size: clamp(3rem, 6vw, 4.5rem); color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / .55); }
 .locked p { color: var(--mist); }
@@ -577,7 +578,6 @@ button { font: inherit; color: inherit; }
   .header-inner { gap: 10px; }
   .kana-rail, .now-showing { display: none; }
   .hero-foot .container { justify-content: center; }
-  .holo-sis { grid-template-columns: 1fr; }
   .cutscene-frame img { object-position: 74% 50%; }
   .feature-grid, .detail-grid, .stats { grid-template-columns: 1fr; }
   .phones { height: 420px; }
