@@ -23,8 +23,9 @@ DNS is on Cloudflare: an A record for `@` pointing to `76.76.21.21` and a CNAME 
 - `index.html`: homepage. Hero video, marquees, intro statement, the room cutscene, SENRITSU, the worlds gallery, more quests (SINHS SIS, ByteForge, Parley), Player 1 (about), and Say hi with fireworks.
 - `senritsu/index.html`: SENRITSU page with the playable demo, app screens, features, worlds, and details.
 - `senritsu/privacy/index.html`: published SENRITSU privacy policy.
-- `byteforge/privacy/index.html` and `parley/privacy/index.html`: published privacy policies for the ByteForge (`~/ByteForge`) and Parley (`~/parley`) Android apps, written by hand from each app's source. Update them when an app's permissions or data handling change.
-- `byteforge/icon.svg`, `parley/icon.png`: app icons for the homepage cards, taken from each app's launcher icon.
+- `byteforge/index.html` and `parley/index.html`: pages for the ByteForge (`../ByteForge`) and Parley (`../parley`) Android apps. Each page takes its accent color from the app icon (`--app` and `--app-2`, set per `data-page` in `assets/site.css`). Parley's hero shows an illustration of Face-to-Face mode, not a screenshot.
+- `byteforge/privacy/index.html` and `parley/privacy/index.html`: published privacy policies for both apps, written by hand from each app's source. Update them when an app's permissions or data handling change.
+- `byteforge/icon.svg`, `parley/icon.png`: app icons, taken from each app's launcher icon.
 - `404.html`: the page Vercel shows for unknown URLs.
 - `assets/site.css`: all styles. Colors and fonts are tokens on `:root`.
 - `assets/site.js`: Press Start, the hero video shader (WebGL ripple and color split under the cursor), sakura petals, music and beat detection, smooth scrolling, scroll scenes, tilt and magnetic hovers, the cursor ring, and fireworks.
@@ -48,6 +49,14 @@ Credits for the wallpapers and music are in `../SENRITSU/ASSET_CREDITS.md`. Rebu
 
 ```sh
 python3 scripts/build_media.py
+```
+
+## Media from the ByteForge and Parley repositories
+
+`scripts/build_app_media.py` builds `assets/media/byteforge/` from screenshots in `../ByteForge/proof` and copies Parley's icon from `../parley`. Phone screenshots are cropped to remove the status bar (carrier and notifications) and the navigation bar. Rebuild with Pillow:
+
+```sh
+python3 scripts/build_app_media.py
 ```
 
 ## Fonts
