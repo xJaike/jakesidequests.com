@@ -761,11 +761,11 @@
   }
 
   function phones() {
-    const stage = $('[data-phones]');
-    if (!stage) return;
-    gsap.fromTo(stage, { '--spread': 0, rotateX: 28, y: 80 }, {
-      '--spread': 1, rotateX: 0, y: 0, ease: 'none',
-      scrollTrigger: { trigger: stage, start: 'top 95%', end: 'center 55%', scrub: .8 }
+    $$('[data-phones]').forEach(stage => {
+      gsap.fromTo(stage, { '--spread': 0, rotateX: 28, y: 80 }, {
+        '--spread': 1, rotateX: 0, y: 0, ease: 'none',
+        scrollTrigger: { trigger: stage, start: 'top 95%', end: 'center 55%', scrub: .8 }
+      });
     });
   }
 

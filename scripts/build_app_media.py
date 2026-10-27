@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build the ByteForge and LanguageBridge page media from their repositories: ByteForge
-screenshots from its proof folder, and LanguageBridge screenshots from docs/screenshots.
+"""Build the app showcase media from their repositories: ByteForge screenshots from its proof
+folder, LanguageBridge screenshots from docs/screenshots, and two SINHS SIS dashboards from its
+design folder.
 
-Run from the website repository with ../ByteForge and ../parley (LanguageBridge) checked out
-beside it:
+Run from the website repository with ../ByteForge, ../parley (LanguageBridge), and ../sinhs-sis
+checked out beside it:
 
     python3 scripts/build_app_media.py
 
@@ -17,8 +18,10 @@ from PIL import Image, ImageDraw, ImageFont
 SITE = pathlib.Path(__file__).resolve().parents[1]
 BYTEFORGE = SITE.parent / "ByteForge"
 LANGUAGEBRIDGE = SITE.parent / "parley"
+SINHS = SITE.parent / "sinhs-sis"
 OUT = SITE / "assets/media/byteforge"
 LANGUAGEBRIDGE_OUT = SITE / "assets/media/languagebridge"
+SINHS_OUT = SITE / "assets/media/sinhs"
 
 # Phone screenshots are 1224x2700 from a real phone. Rows 120-2568 drop the status bar
 # (carrier, notifications) and the navigation bar and leave the app at exactly 1:2.
@@ -51,6 +54,13 @@ RETITLE = ["face-to-face", "transcript"]
 HEADER_BG = (25, 40, 44)
 OLD_TITLE = (50, 200, 236, 270)
 OFFLINE_CHIP = (246, 200, 497, 269)
+# SINHS SIS dashboards, cropped to the top 16:10 of the page. Only dashboards: the class record,
+# attendance, and report card screens show learners' names.
+SINHS_SCREENS = {
+    "admin": ("design/review/v1.3.0/black-gold-ivory-bright-dark.png", (0, 0, 1400, 875)),
+    "teacher": ("design/screens/png/10-TeacherDashboard.png", (0, 0, 1440, 900)),
+}
+SINHS_WIDTH = 1200
 # The 2560x1600 tablet shot without its status bar and taskbar.
 TABLET_CROP = (0, 90, 2560, 1488)
 TABLET_WIDTH = 1600
@@ -98,6 +108,11 @@ def main():
             image = retitle(image)
         image = image.crop(PHONE_CROP)
         save(image.resize(PHONE_SIZE, Image.LANCZOS), name, LANGUAGEBRIDGE_OUT)
+
+    SINHS_OUT.mkdir(parents=True, exist_ok=True)
+    for name, (source, box) in SINHS_SCREENS.items():
+        image = Image.open(SINHS / source).convert("RGB").crop(box)
+        save(image.resize((SINHS_WIDTH, round(image.height * SINHS_WIDTH / image.width)), Image.LANCZOS), name, SINHS_OUT)
 
     # Both launcher icons are vector drawables; byteforge/icon.svg and languagebridge/icon.svg
     # redraw them with their launcher backgrounds.

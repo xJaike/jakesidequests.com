@@ -20,7 +20,7 @@ DNS is on Cloudflare: an A record for `@` pointing to `76.76.21.21` and a CNAME 
 
 ## What's where
 
-- `index.html`: homepage. Hero video, marquees, intro statement, the room cutscene, SENRITSU, the worlds gallery, more quests (SINHS SIS, ByteForge, LanguageBridge), Player 1 (about), and Say hi with fireworks.
+- `index.html`: homepage. Hero video, marquees, intro statement, the room cutscene, a showcase for each app (SENRITSU, SINHS SIS, ByteForge, LanguageBridge), the next quest, Player 1 (about), and Say hi with fireworks. Each app showcase uses SENRITSU's layout: icon, title, summary, chips, buttons, and fanned-out screenshots (phones for the Android apps, browser windows for SINHS SIS). App showcases take their colors from `data-app`, and `flip` puts the screenshots on the left.
 - `senritsu/index.html`: SENRITSU page with the playable demo, app screens, features, worlds, and details.
 - `senritsu/privacy/index.html`: published SENRITSU privacy policy.
 - `byteforge/index.html` and `languagebridge/index.html`: pages for the ByteForge (`../ByteForge`) and LanguageBridge (`../parley`, formerly Parley) Android apps. Each page takes its accent color from the app icon (`--app` and `--app-2`, set per `data-page` in `assets/site.css`).
@@ -51,9 +51,9 @@ Credits for the wallpapers and music are in `../SENRITSU/ASSET_CREDITS.md`. Rebu
 python3 scripts/build_media.py
 ```
 
-## Media from the ByteForge and LanguageBridge repositories
+## Media from the app repositories
 
-`scripts/build_app_media.py` builds `assets/media/byteforge/` from screenshots in `../ByteForge/proof`, and `assets/media/languagebridge/` from `../parley` (screenshots in `docs/screenshots`, captured with `adb exec-out screencap -p`). Phone screenshots are cropped to remove the status bar (carrier and notifications) and the navigation bar. LanguageBridge's Face-to-Face and Transcript screens were captured while the app was still called Parley, so the script redraws their header title in the app's font; once they are retaken, remove `RETITLE` from the script. Rebuild with Pillow:
+`scripts/build_app_media.py` builds `assets/media/byteforge/` from screenshots in `../ByteForge/proof`, `assets/media/sinhs/` from two dashboards in `../sinhs-sis/design` (only dashboards: other screens show learners' names), and `assets/media/languagebridge/` from `../parley` (screenshots in `docs/screenshots`, captured with `adb exec-out screencap -p`). Phone screenshots are cropped to remove the status bar (carrier and notifications) and the navigation bar. LanguageBridge's Face-to-Face and Transcript screens were captured while the app was still called Parley, so the script redraws their header title in the app's font; once they are retaken, remove `RETITLE` from the script. Rebuild with Pillow:
 
 ```sh
 python3 scripts/build_app_media.py

@@ -298,6 +298,20 @@ button { font: inherit; color: inherit; }
 .phone.left { z-index: 2; transform: translateX(calc(var(--off) * -1 * var(--spread))) rotateY(calc(18deg * var(--spread))) rotateZ(calc(-6deg * var(--spread))) scale(calc(1 - .14 * var(--spread))); }
 .phone.right { z-index: 2; transform: translateX(calc(var(--off) * var(--spread))) rotateY(calc(-18deg * var(--spread))) rotateZ(calc(6deg * var(--spread))) scale(calc(1 - .14 * var(--spread))); }
 
+/* Web apps get two overlapping browser windows; --spread moves them apart like the phone fan */
+.browsers { position: relative; height: clamp(380px, 36vw, 500px); perspective: 1400px; --spread: 1; }
+.browser {
+  position: absolute; left: 50%; top: 50%; width: 88%;
+  translate: -50% -50%;
+  padding: 30px 8px 8px; border-radius: 16px;
+  background: linear-gradient(145deg, #2b2560, #0d0a24);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .25), 0 40px 80px -20px rgb(0 0 0 / .8);
+}
+.browser::before { content: ""; position: absolute; top: 12px; left: 16px; width: 8px; height: 8px; border-radius: 50%; background: #ff5f57; box-shadow: 14px 0 #febc2e, 28px 0 #28c840; }
+.browser img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.browser.back { transform: translate(calc(8% * var(--spread)), calc(-16% * var(--spread))) rotateY(calc(-12deg * var(--spread))) scale(calc(1 - .1 * var(--spread))); }
+.browser.front { z-index: 2; transform: translate(calc(-6% * var(--spread)), calc(14% * var(--spread))) rotateY(calc(-6deg * var(--spread))); box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .35), 0 50px 100px -20px rgb(0 0 0 / .9), 0 0 90px color-mix(in srgb, var(--app, var(--cyan)) 30%, transparent); }
+
 /* ---------- Worlds: sideways gallery ---------- */
 
 .worlds { overflow: hidden; }
@@ -326,7 +340,6 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Holo cards ---------- */
 
-.quest-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: clamp(40px, 5vw, 64px); }
 .holo {
   position: relative;
   border-radius: 28px;
@@ -351,14 +364,7 @@ button { font: inherit; color: inherit; }
 .holo:hover { box-shadow: inset 0 0 0 1px rgb(255 255 255 / .28), 0 50px 100px -40px rgb(0 0 0 / 1), 0 0 60px rgb(61 232 255 / .15); }
 .holo h3 { font: 400 clamp(2rem, 4vw, 3.2rem)/1 var(--display); }
 .holo p { max-width: 52ch; color: rgb(244 241 255 / .88); }
-.holo-quest { display: grid; gap: 28px; align-content: start; }
-.holo-quest .seal { width: clamp(88px, 8vw, 120px); border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgb(255 255 255 / .2), 0 0 40px rgb(61 232 255 / .35); }
-.holo-quest .seal.app-icon { border-radius: 24%; background: none; box-shadow: 0 0 0 1px rgb(255 255 255 / .18), 0 0 40px rgb(61 232 255 / .3); }
-.holo-quest .body { display: grid; gap: 18px; justify-items: start; }
-.holo-quest .hero-actions { justify-content: start; margin-top: 0; }
-.holo-quest ul.features { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.holo-quest ul.features li { display: flex; align-items: center; gap: 8px; font-weight: 500; }
-.holo-quest ul.features li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); transform: rotate(45deg); }
+.next-quest .locked { margin-top: clamp(40px, 5vw, 64px); min-height: 240px; }
 .locked { display: grid; place-content: center; justify-items: center; gap: 14px; text-align: center; min-height: 320px; background: repeating-linear-gradient(135deg, rgb(255 255 255 / .03) 0 14px, transparent 14px 28px), #0d0a26; }
 .locked h3 { font-size: clamp(3rem, 6vw, 4.5rem); color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / .55); }
 .locked p { color: var(--mist); }
@@ -514,12 +520,28 @@ button { font: inherit; color: inherit; }
 .detail-grid h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 
 /* App pages (ByteForge, LanguageBridge): each app's own icon colors take the place of SENRITSU's worlds */
-[data-page="byteforge"] { --app: #64dfb5; --app-2: #3de8ff; }
-[data-page="languagebridge"] { --app: #00e0c0; --app-2: #ff7a45; }
-/* LanguageBridge is a long word for the hero title; scale it down so it fits beside the phones */
-[data-page="languagebridge"] .game-hero .glitch { font-size: clamp(1.7rem, 8.8vw, 3.6rem); }
+[data-page="byteforge"], [data-app="byteforge"] { --app: #64dfb5; --app-2: #3de8ff; }
+[data-page="languagebridge"], [data-app="languagebridge"] { --app: #00e0c0; --app-2: #ff7a45; }
+[data-app="sinhs"] { --app: #f2c94c; --app-2: #2f8fa8; }
+/* A long title such as LanguageBridge: smaller, so it fits beside the screenshots */
+.glitch.long { font-size: clamp(1.7rem, 8.8vw, 3.6rem); }
 @media (min-width: 1001px) {
-  [data-page="languagebridge"] .game-hero .glitch { font-size: clamp(2.4rem, 4.3vw, 4.4rem); }
+  .glitch.long { font-size: clamp(2.4rem, 4vw, 4.4rem); }
+}
+/* Homepage app showcases: SENRITSU's layout, with the app's colors in place of a world */
+.featured[data-app] .app-mark img { box-shadow: 0 0 0 2px rgb(255 255 255 / .8), 0 0 40px color-mix(in srgb, var(--app) 60%, transparent); }
+.featured[data-app] .phone.center { box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .35), 0 50px 100px -20px rgb(0 0 0 / .9), 0 0 90px color-mix(in srgb, var(--app) 35%, transparent); }
+.app-mark img.round { border-radius: 50%; background: #fff; }
+.featured.flip::before { background: linear-gradient(270deg, var(--ink) 15%, rgb(7 6 26 / .7) 55%, rgb(7 6 26 / .35)), linear-gradient(180deg, var(--ink), transparent 20%, transparent 80%, var(--ink)); }
+.featured.flip .app-hero-bg {
+  background:
+    radial-gradient(55vw 45vw at 18% 40%, color-mix(in srgb, var(--app) 26%, transparent), transparent 70%),
+    radial-gradient(40vw 35vw at 38% 95%, color-mix(in srgb, var(--app-2) 18%, transparent), transparent 70%),
+    var(--ink);
+}
+.featured.flip .app-hero-bg::after { -webkit-mask-image: radial-gradient(ellipse at 25% 40%, #000, transparent 65%); mask-image: radial-gradient(ellipse at 25% 40%, #000, transparent 65%); }
+@media (min-width: 1001px) {
+  .featured.flip .featured-copy { order: 2; }
 }
 .app-hero-bg {
   position: absolute; inset: 0; z-index: -2;
@@ -599,7 +621,6 @@ button { font: inherit; color: inherit; }
 @media (max-width: 1000px) {
   .demo { width: min(100%, 22.5rem, max(240px, calc(86svh * 9 / 16 + 20px))); }
   .featured-grid, .player-grid, .game-hero-grid { grid-template-columns: 1fr; }
-  .quest-grid { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .policy-layout { grid-template-columns: 1fr; }
@@ -616,6 +637,7 @@ button { font: inherit; color: inherit; }
   .cutscene-frame img { object-position: 74% 50%; }
   .feature-grid, .detail-grid, .stats { grid-template-columns: 1fr; }
   .phones { height: 420px; }
+  .browsers { height: 300px; }
   .phone { width: 170px; }
   .phones { --off: 52%; }
 }
