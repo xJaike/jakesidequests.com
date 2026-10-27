@@ -47,8 +47,8 @@
       "permanent": true
     },
     {
-      "source": "/parley/:path*",
-      "destination": "/languagebridge/:path*",
+      "source": "/parley/(.*)",
+      "destination": "/languagebridge/$1",
       "permanent": true
     }
   ]
