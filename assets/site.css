@@ -513,9 +513,14 @@ button { font: inherit; color: inherit; }
 .detail-grid .holo { display: grid; gap: 16px; align-content: start; justify-items: start; }
 .detail-grid h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 
-/* App pages (ByteForge, Parley): each app's own icon colors take the place of SENRITSU's worlds */
+/* App pages (ByteForge, LanguageBridge): each app's own icon colors take the place of SENRITSU's worlds */
 [data-page="byteforge"] { --app: #64dfb5; --app-2: #3de8ff; }
-[data-page="parley"] { --app: #00e0c0; --app-2: #ff7a45; }
+[data-page="languagebridge"] { --app: #00e0c0; --app-2: #ff7a45; }
+/* LanguageBridge is a long word for the hero title; scale it down so it fits beside the phones */
+[data-page="languagebridge"] .game-hero .glitch { font-size: clamp(1.7rem, 8.8vw, 3.6rem); }
+@media (min-width: 1001px) {
+  [data-page="languagebridge"] .game-hero .glitch { font-size: clamp(2.4rem, 4.3vw, 4.4rem); }
+}
 .app-hero-bg {
   position: absolute; inset: 0; z-index: -2;
   background:
@@ -545,6 +550,9 @@ button { font: inherit; color: inherit; }
 .policy-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(7 6 26 / .7), var(--ink)); }
 .policy-hero h1 { margin-top: 48px; font: 400 clamp(2.6rem, 7vw, 5.6rem)/.95 var(--display); }
 .policy-hero h1 span { display: block; margin-top: 12px; font-size: .5em; color: var(--sakura); }
+/* A long app name such as LanguageBridge: smaller title, same-size subtitle */
+.policy-hero h1.long-title { font-size: clamp(1.7rem, 8.8vw, 5.6rem); }
+.policy-hero h1.long-title span { font-size: .65em; }
 .policy-hero .lede { margin-top: 22px; }
 .policy-hero .hero-actions { justify-content: start; margin-top: 28px; }
 .policy-hero .page-meta { margin-top: 24px; }

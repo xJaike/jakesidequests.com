@@ -45,6 +45,11 @@
       ],
       "destination": "https://jakesidequests.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/parley/:path*",
+      "destination": "/languagebridge/:path*",
+      "permanent": true
     }
   ]
 }
