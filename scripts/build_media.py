@@ -37,7 +37,7 @@ WORLDS = [
 ]
 # Play Store screenshots shown on the site: (site name: screenshot file stem)
 SCREENS = {
-    "six-lanes": "01-six-lanes",
+    "five-lanes": "01-five-lanes",
     "home": "03-home",
     "track-select": "04-track-select",
     "results": "05-results",
