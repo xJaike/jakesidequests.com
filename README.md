@@ -41,7 +41,7 @@ The pages work without JavaScript, and with reduced motion turned on the site sh
 
 - `hero.webm`, `hero.mp4`, `hero-poster.webp`: a 22-second montage of eight cultural theme wallpapers with camera moves and transitions.
 - `worlds/*.webp`: those wallpapers, resized for the galleries.
-- `screens/*.webp`: four phone screens cropped from `design/themes/notes-and-effects-preview.webp`.
+- `screens/*.webp`: six of the Play Store screenshots in `design/play-store/screenshots/`, resized to 540×960 (the status bar is the emulator's clean one, so it stays).
 - `champions-rise.mp3`: the first 64 seconds of Champion's Rise, the site's background music.
 - `demo-champions-rise.mp3` and the chart in `media.json`: a 30-second clip for the demo, with notes placed on the song's 150 BPM grid where the music has strong onsets.
 

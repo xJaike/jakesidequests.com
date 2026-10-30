@@ -35,6 +35,15 @@ WORLDS = [
     ("jade_waterway", "Jade Waterway", "Chinese"),
     ("seoul_dream", "Seoul Dream", "Korean"),
 ]
+# Play Store screenshots shown on the site: (site name: screenshot file stem)
+SCREENS = {
+    "six-lanes": "01-six-lanes",
+    "home": "03-home",
+    "track-select": "04-track-select",
+    "results": "05-results",
+    "theme-studio": "06-theme-studio",
+    "icon-notes": "07-light-icon-notes",
+}
 CLIP = 3.4       # seconds each world is on screen, including its transition
 FADE = 0.7       # transition length
 TRANSITIONS = ["fadewhite", "slideleft", "circleopen", "smoothup", "radial", "wipetl", "hblur"]
@@ -62,15 +71,12 @@ def worlds():
 
 
 def screens():
-    """Crop the four phone screens out of the appearance preview."""
+    """Resize the Play Store screenshots. They are 1080x1920 from an emulator with a clean status bar."""
     (OUT / "screens").mkdir(parents=True, exist_ok=True)
-    sheet = Image.open(APP / "design/themes/notes-and-effects-preview.webp").convert("RGB")
-    names = ["arrows", "icons", "effects", "gameplay"]
-    for index, name in enumerate(names):
-        # Each panel is 360 px wide; the phone UI starts below its 28 px caption.
-        panel = sheet.crop((index * 360, 30, index * 360 + 360, 668))
-        panel.save(OUT / f"screens/{name}.webp", quality=85, method=6)
-    print("screens: 4 crops")
+    for name, source in SCREENS.items():
+        image = Image.open(APP / "design/play-store/screenshots" / f"{source}.png").convert("RGB")
+        image.resize((540, 960), Image.LANCZOS).save(OUT / f"screens/{name}.webp", quality=85, method=6)
+    print(f"screens: {len(SCREENS)} images")
 
 
 def montage():

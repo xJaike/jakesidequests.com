@@ -285,7 +285,7 @@ button { font: inherit; color: inherit; }
 .phone {
   position: absolute; left: 50%; top: 50%;
   width: clamp(190px, 19vw, 16.25rem);
-  aspect-ratio: 360 / 638;
+  aspect-ratio: 9 / 16;
   translate: -50% -50%;
   border-radius: 28px;
   padding: 8px;
